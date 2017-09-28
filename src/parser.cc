@@ -661,7 +661,7 @@ namespace GLEFFECTS {
 #line 186 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {
                                                                 (yyval.techValue) = new TechniqueNode(*(yysemantic_stack_[(5) - (2)].stringVal),*(yysemantic_stack_[(5) - (4)].passValues));
-																driver.calc.AddTechnique(*(yyval.techValue));
+																driver.tree.AddTechnique(*(yyval.techValue));
 																delete (yysemantic_stack_[(5) - (2)].stringVal);
                                                                 delete (yysemantic_stack_[(5) - (4)].passValues);
                                                             }
@@ -686,7 +686,7 @@ namespace GLEFFECTS {
 					(yyval.codeblockValue) = new CodeBlock(*(yysemantic_stack_[(2) - (2)].stringVal),*(yysemantic_stack_[(2) - (1)].stringVal));
 					delete (yysemantic_stack_[(2) - (2)].stringVal);
 					delete (yysemantic_stack_[(2) - (1)].stringVal);
-					driver.calc.AddCodeBlock((yyval.codeblockValue));
+					driver.tree.AddCodeBlock((yyval.codeblockValue));
 				}
     break;
 
@@ -697,7 +697,7 @@ namespace GLEFFECTS {
 					(yyval.codeblockValue) = new CodeBlock(*(yysemantic_stack_[(2) - (2)].stringVal),*(yysemantic_stack_[(2) - (1)].stringVal));
 					delete (yysemantic_stack_[(2) - (2)].stringVal);
 					delete (yysemantic_stack_[(2) - (1)].stringVal);
-					driver.calc.AddCodeBlock((yyval.codeblockValue));
+					driver.tree.AddCodeBlock((yyval.codeblockValue));
 				}
     break;
 

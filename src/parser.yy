@@ -185,7 +185,7 @@ stmt_pass_list: stmt_pass {$$ = new std::vector<PassNode*>();$$->push_back($1);}
 
 stmt_tec:	TECHNIQUE IDENTIFIER '{' stmt_pass_list '}' {
                                                                 $$ = new TechniqueNode(*$2,*$4);
-																driver.calc.AddTechnique(*$$);
+																driver.tree.AddTechnique(*$$);
 																delete $2;
                                                                 delete $4;
                                                             }
@@ -197,13 +197,13 @@ stmt_code_block: CODE_BLOCK STATE_NAME {
 					$$ = new CodeBlock(*$2,*$1);
 					delete $2;
 					delete $1;
-					driver.calc.AddCodeBlock($$);
+					driver.tree.AddCodeBlock($$);
 				}
 				| CODE_BLOCK IDENTIFIER{
 					$$ = new CodeBlock(*$2,*$1);
 					delete $2;
 					delete $1;
-					driver.calc.AddCodeBlock($$);
+					driver.tree.AddCodeBlock($$);
 				}
 
 stmt_code_block_list: stmt_code_block {}

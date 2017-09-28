@@ -76,10 +76,8 @@ public:
 
     /** Reference to the calculator context filled during parsing of the
      * expressions. */
-    class GLEffectsTree& calc;
+    class GLEffectsTree& tree;
 
-private:
-	std::string InsertCodeBlockTag(std::istream& in);
 };
 
 } // namespace example
