@@ -312,30 +312,57 @@ private:
 };
 
 
-
-class DxEffectsTree
+class CodeBlock
 {
 public:
-	DxEffectsTree() {}
-	~DxEffectsTree()
+	CodeBlock(std::string name,std::string code)
+	{
+		m_Name = name;
+		m_Code = code;
+	};
+	~CodeBlock() {};
+
+public:
+	const std::string getName()const { return m_Name; }
+	const std::string getCode()const { return m_Code; }
+
+private:
+	std::string m_Name;
+	std::string m_Code;
+};
+
+
+
+
+class GLEffectsTree
+{
+public:
+	GLEffectsTree() {}
+	~GLEffectsTree()
 	{
 		for (auto tec:m_Techniques)
 		{
 			delete tec;
 		}
 		m_Techniques.clear();
+
+		for (auto block : m_CodeBlocks)
+		{
+			delete block;
+		}
+		m_CodeBlocks.clear();
 	}
-	const std::string getCodeBlock() const { return m_HLSLCodeBlock.str(); }
+	const std::vector<CodeBlock*> getCodeBlocks() const { return m_CodeBlocks; }
 	const std::vector<TechniqueNode*> getTechiques() const { return m_Techniques; }
 	void AddTechnique(TechniqueNode& technique) { m_Techniques.push_back(&technique); }
 
-	void AddCodeBlock(std::string hlslCode)
+	void AddCodeBlock(CodeBlock* block)
 	{
-		m_HLSLCodeBlock << hlslCode << std::endl;
+		m_CodeBlocks.push_back(block);
 	}
 private:
 	std::vector<TechniqueNode*> m_Techniques;
-	std::stringstream m_HLSLCodeBlock;
+	std::vector<CodeBlock*> m_CodeBlocks;
 };
 
 

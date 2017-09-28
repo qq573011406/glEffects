@@ -9,7 +9,7 @@
 
 namespace example {
 
-Driver::Driver(class DxEffectsTree& _calc)
+Driver::Driver(class GLEffectsTree& _calc)
     : trace_scanning(false),
       trace_parsing(false),
       calc(_calc)

@@ -48,7 +48,7 @@ typedef example::Parser::token_type token_type;
 %option stack
 %option caseless
 
-%x PARSE_STATE_HLSLCODEBLOCK
+%x PARSE_STATE_CODEBLOCK
 
 /* The following paragraph suffices to track locations accurately. Each time
  * yylex is invoked, the begin position is moved onto the end position. */
@@ -87,24 +87,28 @@ es_all_states {es_light_states}|{es_material_states}|{es_render_states}|{es_samp
 %}
 
 
-"//HLSL_CODE_BEGIN"  {
-        BEGIN PARSE_STATE_HLSLCODEBLOCK;
+"#CODEBLOCK_BEGIN"  {
+        BEGIN(PARSE_STATE_CODEBLOCK);
         code_block.clear();
         code_block.str("");
     }
-<PARSE_STATE_HLSLCODEBLOCK>"//HLSL_CODE_END" {
+<PARSE_STATE_CODEBLOCK>"#CODEBLOCK_END" {
     yylval->stringVal = new std::string(code_block.str());
     code_block.clear();
     code_block.str("");
-    //BEGIN(INITIAL);
-    return token::HLSL_CODE_BLOCK;
+    BEGIN(INITIAL);
+    return token::CODE_BLOCK;
 }
-<PARSE_STATE_HLSLCODEBLOCK>[^\r\n]+ {
+<PARSE_STATE_CODEBLOCK>. {
     code_block<<yytext;
 }
-<PARSE_STATE_HLSLCODEBLOCK>\n|\r {
+<PARSE_STATE_CODEBLOCK>\n|\r {
     code_block<<std::endl;
     yylloc->lines(yyleng);yylloc->step();
+}
+
+<PARSE_STATE_CODEBLOCK>[ \t] {
+    code_block<<yytext;
 }
 
 

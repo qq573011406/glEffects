@@ -62,6 +62,8 @@ class TechniqueNode;
 	typedef class TechniqueNode		_techNode;
 	typedef class PassNode				_passNode;
 	typedef std::vector<_passNode*>		_passNodes;
+	typedef class CodeBlock             _codeblock;
+	typedef std::vector<_codeblock*>    _codeblocks;
 	typedef class StateAssignmentNode	_stateAssignmentNode;
 	typedef std::vector<_stateAssignmentNode*> _stateAssignmentNodes;
 	typedef class StateAssignmentValue  _stateAssignmentNodeValue;
@@ -75,6 +77,8 @@ class TechniqueNode;
 	_stateAssignmentNode  *stateAssignmentValue;
 	_stateAssignmentNodes  *stateAssignmentValues;
 	_stateAssignmentNodeValue *stateValue;
+	_codeblock				*codeblockValue;
+	_codeblocks				*codeblockValues;
 
 	int					  integerVal;
 	float				  floatVal;
@@ -83,7 +87,7 @@ class TechniqueNode;
 }
 %token PASS TECHNIQUE
 %token FLOAT2 FLOAT3 FLOAT4
-%token <stringVal>  STATE_NAME STRING IDENTIFIER HLSL_CODE_BLOCK
+%token <stringVal>  STATE_NAME STRING IDENTIFIER CODE_BLOCK
 %token <integerVal>   INTEGER;
 %token <floatVal> FLOAT;
 %token <boolVal>  BOOLEAN
@@ -102,6 +106,8 @@ class TechniqueNode;
 %type <stateValue> stmt_state_value
 %type <stateAssignmentValue> stmt_state
 %type <stateAssignmentValues> stmt_state_list
+%type <codeblockValue>  stmt_code_block
+%type <codeblockValues> stmt_code_block_list
 
 %destructor { delete $$; } IDENTIFIER
 %destructor { delete $$; } stmt_tec
@@ -187,9 +193,23 @@ stmt_tec:	TECHNIQUE IDENTIFIER '{' stmt_pass_list '}' {
 stmt_tec_list: stmt_tec {}
               |   stmt_tec stmt_tec_list {}
 
-start:   HLSL_CODE_BLOCK stmt_tec_list {
-				driver.calc.AddCodeBlock(*$1);delete $1;
-		}
+stmt_code_block: CODE_BLOCK STATE_NAME {
+					$$ = new CodeBlock(*$2,*$1);
+					delete $2;
+					delete $1;
+					driver.calc.AddCodeBlock($$);
+				}
+				| CODE_BLOCK IDENTIFIER{
+					$$ = new CodeBlock(*$2,*$1);
+					delete $2;
+					delete $1;
+					driver.calc.AddCodeBlock($$);
+				}
+
+stmt_code_block_list: stmt_code_block {}
+					| stmt_code_block stmt_code_block_list {}
+
+start:   stmt_code_block_list stmt_tec_list {}
 
  /*** END EXAMPLE - Change the example grammar rules above ***/
 

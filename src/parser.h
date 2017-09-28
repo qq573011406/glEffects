@@ -67,13 +67,15 @@ namespace example {
     union semantic_type
     {
 /* Line 33 of lalr1.cc  */
-#line 59 "E:/Source/GitRepos/dxEffectsParser/src/parser.yy"
+#line 59 "E:/Source/GitRepos/glEffects/src/parser.yy"
 
 	typedef std::string					_str;
 	typedef std::vector<_str*>			_strs;
 	typedef class TechniqueNode		_techNode;
 	typedef class PassNode				_passNode;
 	typedef std::vector<_passNode*>		_passNodes;
+	typedef class CodeBlock             _codeblock;
+	typedef std::vector<_codeblock*>    _codeblocks;
 	typedef class StateAssignmentNode	_stateAssignmentNode;
 	typedef std::vector<_stateAssignmentNode*> _stateAssignmentNodes;
 	typedef class StateAssignmentValue  _stateAssignmentNodeValue;
@@ -87,6 +89,8 @@ namespace example {
 	_stateAssignmentNode  *stateAssignmentValue;
 	_stateAssignmentNodes  *stateAssignmentValues;
 	_stateAssignmentNodeValue *stateValue;
+	_codeblock				*codeblockValue;
+	_codeblocks				*codeblockValues;
 
 	int					  integerVal;
 	float				  floatVal;
@@ -95,7 +99,7 @@ namespace example {
 
 
 /* Line 33 of lalr1.cc  */
-#line 99 "parser.h"
+#line 103 "parser.h"
     };
 #else
     typedef YYSTYPE semantic_type;
@@ -116,7 +120,7 @@ namespace example {
      STATE_NAME = 263,
      STRING = 264,
      IDENTIFIER = 265,
-     HLSL_CODE_BLOCK = 266,
+     CODE_BLOCK = 266,
      INTEGER = 267,
      FLOAT = 268,
      BOOLEAN = 269,
@@ -298,7 +302,7 @@ namespace example {
 
 } // example
 /* Line 33 of lalr1.cc  */
-#line 302 "parser.h"
+#line 306 "parser.h"
 
 
 

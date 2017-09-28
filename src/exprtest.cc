@@ -83,7 +83,7 @@ std::vector<std::string> getFiles(std::string cate_dir)
 
 bool test_file(std::string filePath, bool p, bool s, bool v)
 {
-	DxEffectsTree tree;
+	GLEffectsTree tree;
 	example::Driver driver(tree);
 	driver.trace_parsing = p;
 	driver.trace_scanning = s;
@@ -97,8 +97,14 @@ bool test_file(std::string filePath, bool p, bool s, bool v)
 
 	bool result = driver.parse_stream(infile,filePath);
 	if (result && v) {
-		std::cout << "CodeBlock:" << std::endl;
-		std::cout << tree.getCodeBlock() << std::endl;
+		std::cout << "CodeBlocks:" << std::endl;
+
+		auto codeblocks = tree.getCodeBlocks();
+		for(auto block : codeblocks)
+		{
+			std::cout << "BlockName:" + block->getName()<<std::endl;
+			std::cout << "BlockCode:\n" + block->getCode() << std::endl;
+		}
 		std::cout << "Techniques:" << std::endl;
 		auto techiques = tree.getTechiques();
 		for (unsigned int ei = 0; ei < techiques.size(); ++ei)

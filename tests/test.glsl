@@ -1,5 +1,4 @@
-CodeBlock SimpleMainVS
-{
+#CODEBLOCK_BEGIN
 #version 140
 float xll_saturate_f( float x) {
   return clamp( x, 0.0, 1.0);
@@ -22,63 +21,63 @@ mat3 xll_saturate_mf3x3(mat3 m) {
 mat4 xll_saturate_mf4x4(mat4 m) {
   return mat4( clamp(m[0], 0.0, 1.0), clamp(m[1], 0.0, 1.0), clamp(m[2], 0.0, 1.0), clamp(m[3], 0.0, 1.0));
 }
-#line 41
+#line 39
 struct SimpleVSOut {
     vec4 pos;
     vec2 texcoord;
     vec4 color;
 };
-#line 54
+#line 52
 struct SelectBlockVSOut {
     vec4 pos;
     vec2 texcoord;
 };
-#line 19
+#line 17
 uniform mat4 mWorldViewProj;
-#line 23
+#line 21
 uniform vec4 light_params;
 uniform vec3 sun_vec;
 uniform bool g_bEnableFog;
-#line 27
+#line 25
 uniform vec4 g_fogParam;
 uniform vec4 g_fogColor;
 uniform mat4 mWorld;
-#line 32
+#line 30
 uniform sampler tex0Sampler;
-#line 65
-#line 78
-#line 113
-#line 147
-#line 162
-#line 170
-#line 179
-#line 65
+#line 63
+#line 76
+#line 111
+#line 145
+#line 160
+#line 168
+#line 177
+#line 63
 float CalcFogFactor( in float d ) {
     float fogCoeff = 0.0;
     fogCoeff = ((d - g_fogParam.x) / g_fogParam.y);
-    #line 70
+    #line 68
     return clamp( fogCoeff, 0.0, 1.0);
 }
-#line 78
+#line 76
 SimpleVSOut SimpleMainVS( in vec4 pos, in vec3 Norm, in vec4 color, in vec4 color2, in vec2 texcoord ) {
     SimpleVSOut xlat_varoutput;
     xlat_varoutput.pos = (pos * mWorldViewProj);
-    #line 82
+    #line 80
     xlat_varoutput.texcoord = texcoord;
     float torch_light_strength = color.y;
-    #line 86
+    #line 84
     vec3 torch_light = (light_params.xyz * torch_light_strength);
     float sun_light_strength = clamp( (color.x * light_params.w), 0.0, 1.0);
-    #line 91
+    #line 89
     float lightFactor = (0.7 + (0.3 * xll_saturate_f(dot( sun_vec, Norm))));
     vec3 sun_light = ((vec3( 1.0, 1.0, 1.0) + (g_fogColor.xyz * 0.05)) * (sun_light_strength * lightFactor));
     torch_light_strength *= lightFactor;
-    #line 96
+    #line 94
     vec3 final_light = mix( (torch_light.xyz + sun_light.xyz), sun_light.xyz, vec3( (sun_light_strength / ((torch_light_strength + sun_light_strength) + 0.001))));
-    #line 100
+    #line 98
     xlat_varoutput.color.xyz = (final_light * color.w);
     xlat_varoutput.color.xyz *= color2.xyz;
-    #line 104
+    #line 102
     xlat_varoutput.color.w = CalcFogFactor( length(xlat_varoutput.pos.xyz));
     return xlat_varoutput;
 }
@@ -99,46 +98,45 @@ void main() {
 // mWorldViewProj:worldviewprojection type 21 arrsize 0
 // sun_vec:sunvector type 11 arrsize 0
 
-}
+#CODEBLOCK_END SimpleMainVS
 
 
-CodeBlock SimpleMainPS
-{
+#CODEBLOCK_BEGIN
 #version 140
 
-#line 41
+#line 39
 struct SimpleVSOut {
     vec4 pos;
     vec2 texcoord;
     vec4 color;
 };
-#line 54
+#line 52
 struct SelectBlockVSOut {
     vec4 pos;
     vec2 texcoord;
 };
-#line 19
+#line 17
 uniform mat4 mWorldViewProj;
-#line 23
+#line 21
 uniform vec4 light_params;
 uniform vec3 sun_vec;
 uniform bool g_bEnableFog;
-#line 27
+#line 25
 uniform vec4 g_fogParam;
 uniform vec4 g_fogColor;
 uniform mat4 mWorld;
-#line 32
+#line 30
 uniform sampler tex0Sampler;
-#line 65
-#line 78
-#line 113
-#line 147
-#line 162
-#line 170
-#line 179
-#line 139
+#line 63
+#line 76
+#line 111
+#line 145
+#line 160
+#line 168
+#line 177
+#line 137
 vec4 SimpleMainPS( in SimpleVSOut xlat_varinput ) {
-    #line 141
+    #line 139
     vec4 albedoColor = texture( tex0Sampler, xlat_varinput.texcoord);
     vec4 oColor = vec4( mix( (albedoColor.xyz * xlat_varinput.color.xyz), g_fogColor.xyz, vec3( xlat_varinput.color.w)), albedoColor.w);
     return oColor;
@@ -159,48 +157,47 @@ void main() {
 // g_fogColor:fogColor type 12 arrsize 0
 // tex0Sampler:<none> type 25 arrsize 0 register s0
 
-}
+#CODEBLOCK_END SimpleMainPS
 
 
-CodeBlock SelectBlockVS
-{
+#CODEBLOCK_BEGIN
 #version 140
 
-#line 41
+#line 39
 struct SimpleVSOut {
     vec4 pos;
     vec2 texcoord;
     vec4 color;
 };
-#line 54
+#line 52
 struct SelectBlockVSOut {
     vec4 pos;
     vec2 texcoord;
 };
-#line 19
+#line 17
 uniform mat4 mWorldViewProj;
-#line 23
+#line 21
 uniform vec4 light_params;
 uniform vec3 sun_vec;
 uniform bool g_bEnableFog;
-#line 27
+#line 25
 uniform vec4 g_fogParam;
 uniform vec4 g_fogColor;
 uniform mat4 mWorld;
-#line 32
+#line 30
 uniform sampler tex0Sampler;
-#line 65
-#line 78
-#line 113
-#line 147
-#line 162
-#line 170
-#line 179
-#line 162
+#line 63
+#line 76
+#line 111
+#line 145
+#line 160
+#line 168
+#line 177
+#line 160
 SelectBlockVSOut SelectBlockVS( in vec4 pos, in vec2 texcoord ) {
     SelectBlockVSOut result;
     result.pos = (pos * mWorldViewProj);
-    #line 166
+    #line 164
     result.texcoord = texcoord;
     return result;
 }
@@ -215,47 +212,46 @@ void main() {
 // uniforms:
 // mWorldViewProj:worldviewprojection type 21 arrsize 0
 
-}
+#CODEBLOCK_END SelectBlockVS
 
 
-CodeBlock SelectBlockPS
-{
+#CODEBLOCK_BEGIN
 #version 140
 
-#line 41
+#line 39
 struct SimpleVSOut {
     vec4 pos;
     vec2 texcoord;
     vec4 color;
 };
-#line 54
+#line 52
 struct SelectBlockVSOut {
     vec4 pos;
     vec2 texcoord;
 };
-#line 19
+#line 17
 uniform mat4 mWorldViewProj;
-#line 23
+#line 21
 uniform vec4 light_params;
 uniform vec3 sun_vec;
 uniform bool g_bEnableFog;
-#line 27
+#line 25
 uniform vec4 g_fogParam;
 uniform vec4 g_fogColor;
 uniform mat4 mWorld;
-#line 32
+#line 30
 uniform sampler tex0Sampler;
-#line 65
-#line 78
-#line 113
-#line 147
-#line 162
-#line 170
-#line 179
-#line 170
+#line 63
+#line 76
+#line 111
+#line 145
+#line 160
+#line 168
+#line 177
+#line 168
 vec4 SelectBlockPS( in SelectBlockVSOut xlat_varinput ) {
     vec4 color = texture( tex0Sampler, xlat_varinput.texcoord);
-    #line 174
+    #line 172
     color.xyz *= light_params.x;
     color.w = 1.0;
     return color;
@@ -274,48 +270,47 @@ void main() {
 // light_params:ConstVector0 type 12 arrsize 0
 // tex0Sampler:<none> type 25 arrsize 0 register s0
 
-}
+#CODEBLOCK_END SelectBlockPS
 
 
-CodeBlock SelectBlockVS
-{
+#CODEBLOCK_BEGIN
 #version 140
 
-#line 41
+#line 39
 struct SimpleVSOut {
     vec4 pos;
     vec2 texcoord;
     vec4 color;
 };
-#line 54
+#line 52
 struct SelectBlockVSOut {
     vec4 pos;
     vec2 texcoord;
 };
-#line 19
+#line 17
 uniform mat4 mWorldViewProj;
-#line 23
+#line 21
 uniform vec4 light_params;
 uniform vec3 sun_vec;
 uniform bool g_bEnableFog;
-#line 27
+#line 25
 uniform vec4 g_fogParam;
 uniform vec4 g_fogColor;
 uniform mat4 mWorld;
-#line 32
+#line 30
 uniform sampler tex0Sampler;
-#line 65
-#line 78
-#line 113
-#line 147
-#line 162
-#line 170
-#line 179
-#line 162
+#line 63
+#line 76
+#line 111
+#line 145
+#line 160
+#line 168
+#line 177
+#line 160
 SelectBlockVSOut SelectBlockVS( in vec4 pos, in vec2 texcoord ) {
     SelectBlockVSOut result;
     result.pos = (pos * mWorldViewProj);
-    #line 166
+    #line 164
     result.texcoord = texcoord;
     return result;
 }
@@ -330,48 +325,47 @@ void main() {
 // uniforms:
 // mWorldViewProj:worldviewprojection type 21 arrsize 0
 
-}
+#CODEBLOCK_END SelectBlockVS
 
 
-CodeBlock DamagedBlockPS
-{
+#CODEBLOCK_BEGIN
 #version 140
 
-#line 41
+#line 39
 struct SimpleVSOut {
     vec4 pos;
     vec2 texcoord;
     vec4 color;
 };
-#line 54
+#line 52
 struct SelectBlockVSOut {
     vec4 pos;
     vec2 texcoord;
 };
-#line 19
+#line 17
 uniform mat4 mWorldViewProj;
-#line 23
+#line 21
 uniform vec4 light_params;
 uniform vec3 sun_vec;
 uniform bool g_bEnableFog;
-#line 27
+#line 25
 uniform vec4 g_fogParam;
 uniform vec4 g_fogColor;
 uniform mat4 mWorld;
-#line 32
+#line 30
 uniform sampler tex0Sampler;
-#line 65
-#line 78
-#line 113
-#line 147
-#line 162
-#line 170
-#line 179
-#line 179
+#line 63
+#line 76
+#line 111
+#line 145
+#line 160
+#line 168
+#line 177
+#line 177
 vec4 DamagedBlockPS( in SelectBlockVSOut xlat_varinput ) {
     vec4 color;
     color = texture( tex0Sampler, xlat_varinput.texcoord);
-    #line 184
+    #line 182
     return color;
 }
 varying vec2 xlv_TEXCOORD0;
@@ -387,68 +381,67 @@ void main() {
 // uniforms:
 // tex0Sampler:<none> type 25 arrsize 0 register s0
 
-}
+#CODEBLOCK_END DamagedBlockPS
 
 
-CodeBlock TransparentSimpleMainVS
-{
+#CODEBLOCK_BEGIN
 #version 140
 
-#line 41
+#line 39
 struct SimpleVSOut {
     vec4 pos;
     vec2 texcoord;
     vec4 color;
 };
-#line 54
+#line 52
 struct SelectBlockVSOut {
     vec4 pos;
     vec2 texcoord;
 };
-#line 19
+#line 17
 uniform mat4 mWorldViewProj;
-#line 23
+#line 21
 uniform vec4 light_params;
 uniform vec3 sun_vec;
 uniform bool g_bEnableFog;
-#line 27
+#line 25
 uniform vec4 g_fogParam;
 uniform vec4 g_fogColor;
 uniform mat4 mWorld;
-#line 32
+#line 30
 uniform sampler tex0Sampler;
-#line 65
-#line 78
-#line 113
-#line 147
-#line 162
-#line 170
-#line 179
-#line 65
+#line 63
+#line 76
+#line 111
+#line 145
+#line 160
+#line 168
+#line 177
+#line 63
 float CalcFogFactor( in float d ) {
     float fogCoeff = 0.0;
     fogCoeff = ((d - g_fogParam.x) / g_fogParam.y);
-    #line 70
+    #line 68
     return clamp( fogCoeff, 0.0, 1.0);
 }
-#line 113
+#line 111
 SimpleVSOut TransparentSimpleMainVS( in vec4 pos, in vec3 Norm, in vec4 color, in vec4 color2, in vec2 texcoord ) {
     SimpleVSOut xlat_varoutput;
     xlat_varoutput.pos = (pos * mWorldViewProj);
-    #line 117
+    #line 115
     xlat_varoutput.texcoord = texcoord;
     float torch_light_strength = color.y;
-    #line 121
+    #line 119
     vec3 torch_light = (light_params.xyz * torch_light_strength);
     float sun_light_strength = clamp( (color.x * light_params.w), 0.0, 1.0);
-    #line 125
+    #line 123
     vec3 sun_light = ((vec3( 1.0, 1.0, 1.0) + (g_fogColor.xyz * 0.05)) * sun_light_strength);
     vec3 final_light = mix( (torch_light.xyz + sun_light.xyz), sun_light.xyz, vec3( (sun_light_strength / ((torch_light_strength + sun_light_strength) + 0.001))));
-    #line 132
+    #line 130
     xlat_varoutput.color.xyz = (final_light * color.w);
     xlat_varoutput.color.xyz *= color2.xyz;
     xlat_varoutput.color.w = CalcFogFactor( length(xlat_varoutput.pos.xyz));
-    #line 136
+    #line 134
     return xlat_varoutput;
 }
 varying vec2 xlv_TEXCOORD0;
@@ -467,11 +460,10 @@ void main() {
 // light_params:ConstVector0 type 12 arrsize 0
 // mWorldViewProj:worldviewprojection type 21 arrsize 0
 
-}
+#CODEBLOCK_END TransparentSimpleMainVS
 
 
-CodeBlock TransparentMainPS
-{
+#CODEBLOCK_BEGIN
 #version 140
 void xll_clip_f(float x) {
   if ( x<0.0 ) discard;
@@ -485,41 +477,41 @@ void xll_clip_vf3(vec3 x) {
 void xll_clip_vf4(vec4 x) {
   if (any(lessThan(x,vec4(0.0)))) discard;
 }
-#line 41
+#line 39
 struct SimpleVSOut {
     vec4 pos;
     vec2 texcoord;
     vec4 color;
 };
-#line 54
+#line 52
 struct SelectBlockVSOut {
     vec4 pos;
     vec2 texcoord;
 };
-#line 19
+#line 17
 uniform mat4 mWorldViewProj;
-#line 23
+#line 21
 uniform vec4 light_params;
 uniform vec3 sun_vec;
 uniform bool g_bEnableFog;
-#line 27
+#line 25
 uniform vec4 g_fogParam;
 uniform vec4 g_fogColor;
 uniform mat4 mWorld;
-#line 32
+#line 30
 uniform sampler tex0Sampler;
-#line 65
-#line 78
-#line 113
-#line 147
-#line 162
-#line 170
-#line 179
-#line 147
+#line 63
+#line 76
+#line 111
+#line 145
+#line 160
+#line 168
+#line 177
+#line 145
 vec4 TransparentMainPS( in SimpleVSOut xlat_varinput ) {
     vec4 albedoColor = texture( tex0Sampler, xlat_varinput.texcoord);
     xll_clip_f((albedoColor.w - 0.95));
-    #line 151
+    #line 149
     vec4 oColor = vec4( mix( (albedoColor.xyz * xlat_varinput.color.xyz), g_fogColor.xyz, vec3( xlat_varinput.color.w)), albedoColor.w);
     return oColor;
 }
@@ -539,7 +531,7 @@ void main() {
 // g_fogColor:fogColor type 12 arrsize 0
 // tex0Sampler:<none> type 25 arrsize 0 register s0
 
-}
+#CODEBLOCK_END TransparentMainPS
 
 
 

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-project(DxEffectsParser)
+project(glEffectsParser)
 
 
 if(WIN32)
@@ -35,16 +35,16 @@ if(WIN32)
 endif(WIN32)
 
 
-add_library(fxParser
+add_library(glEffectsParser
 ${PROJECT_SOURCE_DIR}/src/expression.h
 ${PROJECT_SOURCE_DIR}/src/parser.cc
 ${PROJECT_SOURCE_DIR}/src/scanner.cc
 ${PROJECT_SOURCE_DIR}/src/driver.h
 ${PROJECT_SOURCE_DIR}/src/driver.cc
 )
-target_include_directories(fxParser PUBLIC ${PROJECT_SOURCE_DIR}/src/)
+target_include_directories(glEffectsParser PUBLIC ${PROJECT_SOURCE_DIR}/src/)
 
-add_executable(fxParserTest ${PROJECT_SOURCE_DIR}/src/exprtest.cc)
+add_executable(glEffectsParserTest ${PROJECT_SOURCE_DIR}/src/exprtest.cc)
 
-target_link_libraries(fxParserTest fxParser)
+target_link_libraries(glEffectsParserTest glEffectsParser)
 
