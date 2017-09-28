@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-#include "expression.h"
+#include "gleffects.h"
 
 class TechniqueNode;
 
@@ -33,7 +33,7 @@ class TechniqueNode;
 %skeleton "lalr1.cc"
 
 /* namespace to enclose parser in */
-%name-prefix="example"
+%name-prefix="GLEFFECTS"
 
 /* set the parser's class identifier */
 %define "parser_class_name" "Parser"
@@ -215,7 +215,7 @@ start:   stmt_code_block_list stmt_tec_list {}
 
 %% /*** Additional Code ***/
 
-void example::Parser::error(const Parser::location_type& l,
+void GLEFFECTS::Parser::error(const Parser::location_type& l,
 			    const std::string& m)
 {
     driver.error(l, m);

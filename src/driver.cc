@@ -7,7 +7,7 @@
 #include "driver.h"
 #include "scanner.h"
 
-namespace example {
+namespace GLEFFECTS {
 
 Driver::Driver(class GLEffectsTree& _calc)
     : trace_scanning(false),

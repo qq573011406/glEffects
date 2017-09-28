@@ -32,16 +32,16 @@
 
 /**
  ** \file location.hh
- ** Define the example::location class.
+ ** Define the GLEFFECTS::location class.
  */
 
-#ifndef YY_EXAMPLE_LOCATION_HH_INCLUDED
-# define YY_EXAMPLE_LOCATION_HH_INCLUDED
+#ifndef YY_GLEFFECTS_LOCATION_HH_INCLUDED
+# define YY_GLEFFECTS_LOCATION_HH_INCLUDED
 
 # include "position.hh"
 
 
-namespace example {
+namespace GLEFFECTS {
 /* Line 166 of location.cc  */
 #line 47 "location.hh"
 
@@ -174,8 +174,8 @@ namespace example {
   }
 
 
-} // example
+} // GLEFFECTS
 /* Line 296 of location.cc  */
 #line 180 "location.hh"
 
-#endif /* !YY_EXAMPLE_LOCATION_HH_INCLUDED  */
+#endif /* !YY_GLEFFECTS_LOCATION_HH_INCLUDED  */

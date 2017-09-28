@@ -12,7 +12,7 @@ class GLEffectsTree;
 
 /** The example namespace is used to encapsulate the three parser classes
  * example::Parser, example::Scanner and example::Driver */
-namespace example {
+namespace GLEFFECTS {
 
 /** The Driver class brings together all components. It creates an instance of
  * the Parser and Scanner classes and connects them. Then the input stream is

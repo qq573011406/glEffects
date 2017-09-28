@@ -28,17 +28,17 @@
      * We will address this in a future release of flex, or omit the C++ scanner
      * altogether.
      */
-    #define yyFlexLexer ExampleFlexLexer
+    #define yyFlexLexer GLEFFECTSFlexLexer
 /* %endif */
 
 /* %if-c-only */
 /* %endif */
 
-    #define yyalloc Examplealloc
+    #define yyalloc GLEFFECTSalloc
 
-    #define yyrealloc Examplerealloc
+    #define yyrealloc GLEFFECTSrealloc
 
-    #define yyfree Examplefree
+    #define yyfree GLEFFECTSfree
 
 /* %if-c-only */
 /* %endif */
@@ -333,9 +333,9 @@ struct yy_buffer_state
 /* %endif */
 /* %endif */
 
-void *Examplealloc ( yy_size_t  );
-void *Examplerealloc ( void *, yy_size_t  );
-void Examplefree ( void *  );
+void *GLEFFECTSalloc ( yy_size_t  );
+void *GLEFFECTSrealloc ( void *, yy_size_t  );
+void GLEFFECTSfree ( void *  );
 
 #define yy_new_buffer yy_create_buffer
 #define yy_set_interactive(is_interactive) \
@@ -1831,8 +1831,8 @@ static const flex_int16_t yy_rule_linenum[24] =
 std::stringstream code_block;
 
 /* import the parser's token type into a local typedef */
-typedef example::Parser::token token;
-typedef example::Parser::token_type token_type;
+typedef GLEFFECTS::Parser::token token;
+typedef GLEFFECTS::Parser::token_type token_type;
 
 /* By default yylex returns int, we use token_type. Unfortunately yyterminate
  * by default returns 0, which is not of token_type. */
@@ -2491,9 +2491,9 @@ void yyFlexLexer::ctor_common()
 yyFlexLexer::~yyFlexLexer()
 {
 	delete [] yy_state_buf;
-	Examplefree(yy_start_stack  );
+	GLEFFECTSfree(yy_start_stack  );
 	yy_delete_buffer( YY_CURRENT_BUFFER );
-	Examplefree(yy_buffer_stack  );
+	GLEFFECTSfree(yy_buffer_stack  );
 }
 
 /* The contents of this function are C++ specific, so the () macro is not used.
@@ -2641,7 +2641,7 @@ int yyFlexLexer::yy_get_next_buffer()
 
 				b->yy_ch_buf = (char *)
 					/* Include room in for 2 EOB chars. */
-					Examplerealloc((void *) b->yy_ch_buf,(yy_size_t) (b->yy_buf_size + 2)  );
+					GLEFFECTSrealloc((void *) b->yy_ch_buf,(yy_size_t) (b->yy_buf_size + 2)  );
 				}
 			else
 				/* Can't grow it, we don't own it. */
@@ -2690,7 +2690,7 @@ int yyFlexLexer::yy_get_next_buffer()
 	if (((yy_n_chars) + number_to_move) > YY_CURRENT_BUFFER_LVALUE->yy_buf_size) {
 		/* Extend the array by 50%, plus the number we really need. */
 		int new_size = (yy_n_chars) + number_to_move + ((yy_n_chars) >> 1);
-		YY_CURRENT_BUFFER_LVALUE->yy_ch_buf = (char *) Examplerealloc((void *) YY_CURRENT_BUFFER_LVALUE->yy_ch_buf,(yy_size_t) new_size  );
+		YY_CURRENT_BUFFER_LVALUE->yy_ch_buf = (char *) GLEFFECTSrealloc((void *) YY_CURRENT_BUFFER_LVALUE->yy_ch_buf,(yy_size_t) new_size  );
 		if ( ! YY_CURRENT_BUFFER_LVALUE->yy_ch_buf )
 			YY_FATAL_ERROR( "out of dynamic memory in yy_get_next_buffer()" );
 	}
@@ -2998,7 +2998,7 @@ void yyFlexLexer::yyrestart( std::istream* input_file )
 {
 	YY_BUFFER_STATE b;
     
-	b = (YY_BUFFER_STATE) Examplealloc(sizeof( struct yy_buffer_state )  );
+	b = (YY_BUFFER_STATE) GLEFFECTSalloc(sizeof( struct yy_buffer_state )  );
 	if ( ! b )
 		YY_FATAL_ERROR( "out of dynamic memory in yy_create_buffer()" );
 
@@ -3007,7 +3007,7 @@ void yyFlexLexer::yyrestart( std::istream* input_file )
 	/* yy_ch_buf has to be 2 characters longer than the size given because
 	 * we need to put in 2 end-of-buffer characters.
 	 */
-	b->yy_ch_buf = (char *) Examplealloc((yy_size_t) (b->yy_buf_size + 2)  );
+	b->yy_ch_buf = (char *) GLEFFECTSalloc((yy_size_t) (b->yy_buf_size + 2)  );
 	if ( ! b->yy_ch_buf )
 		YY_FATAL_ERROR( "out of dynamic memory in yy_create_buffer()" );
 
@@ -3049,9 +3049,9 @@ void yyFlexLexer::yyrestart( std::istream* input_file )
 		YY_CURRENT_BUFFER_LVALUE = (YY_BUFFER_STATE) 0;
 
 	if ( b->yy_is_our_buffer )
-		Examplefree((void *) b->yy_ch_buf  );
+		GLEFFECTSfree((void *) b->yy_ch_buf  );
 
-	Examplefree((void *) b  );
+	GLEFFECTSfree((void *) b  );
 }
 
 /* Initializes or reinitializes a buffer.
@@ -3207,7 +3207,7 @@ void yyFlexLexer::yyensure_buffer_stack(void)
 		 * immediate realloc on the next call.
          */
       num_to_alloc = 1; /* After all that talk, this was set to 1 anyways... */
-		(yy_buffer_stack) = (struct yy_buffer_state**)Examplealloc
+		(yy_buffer_stack) = (struct yy_buffer_state**)GLEFFECTSalloc
 								(num_to_alloc * sizeof(struct yy_buffer_state*)
 								);
 		if ( ! (yy_buffer_stack) )
@@ -3226,7 +3226,7 @@ void yyFlexLexer::yyensure_buffer_stack(void)
 		yy_size_t grow_size = 8 /* arbitrary grow size */;
 
 		num_to_alloc = (yy_buffer_stack_max) + grow_size;
-		(yy_buffer_stack) = (struct yy_buffer_state**)Examplerealloc
+		(yy_buffer_stack) = (struct yy_buffer_state**)GLEFFECTSrealloc
 								((yy_buffer_stack),
 								num_to_alloc * sizeof(struct yy_buffer_state*)
 								);
@@ -3263,10 +3263,10 @@ void yyFlexLexer::yyensure_buffer_stack(void)
 		new_size = (yy_size_t) (yy_start_stack_depth) * sizeof( int );
 
 		if ( ! (yy_start_stack) )
-			(yy_start_stack) = (int *) Examplealloc(new_size  );
+			(yy_start_stack) = (int *) GLEFFECTSalloc(new_size  );
 
 		else
-			(yy_start_stack) = (int *) Examplerealloc((void *) (yy_start_stack),new_size  );
+			(yy_start_stack) = (int *) GLEFFECTSrealloc((void *) (yy_start_stack),new_size  );
 
 		if ( ! (yy_start_stack) )
 			YY_FATAL_ERROR( "out of memory expanding start-condition stack" );
@@ -3376,12 +3376,12 @@ static int yy_flex_strlen (const char * s )
 }
 #endif
 
-void *Examplealloc (yy_size_t  size )
+void *GLEFFECTSalloc (yy_size_t  size )
 {
 			return malloc(size);
 }
 
-void *Examplerealloc  (void * ptr, yy_size_t  size )
+void *GLEFFECTSrealloc  (void * ptr, yy_size_t  size )
 {
 		
 	/* The cast to (char *) in the following accommodates both
@@ -3394,9 +3394,9 @@ void *Examplerealloc  (void * ptr, yy_size_t  size )
 	return realloc(ptr, size);
 }
 
-void Examplefree (void * ptr )
+void GLEFFECTSfree (void * ptr )
 {
-			free( (char *) ptr );	/* see Examplerealloc() for (char *) cast */
+			free( (char *) ptr );	/* see GLEFFECTSrealloc() for (char *) cast */
 }
 
 /* %if-tables-serialization definitions */
@@ -3409,11 +3409,11 @@ void Examplefree (void * ptr )
 #line 166 "E:/Source/GitRepos/glEffects/src/scanner.l"
 
 
-namespace example {
+namespace GLEFFECTS {
 
 Scanner::Scanner(std::istream* in,
 		 std::ostream* out)
-    : ExampleFlexLexer(in, out)
+    : GLEFFECTSFlexLexer(in, out)
 {
 }
 
@@ -3436,7 +3436,7 @@ void Scanner::set_debug(bool b)
 #undef yylex
 #endif
 
-int ExampleFlexLexer::yylex()
+int GLEFFECTSFlexLexer::yylex()
 {
     std::cerr << "in ExampleFlexLexer::yylex() !" << std::endl;
     return 0;
@@ -3448,7 +3448,7 @@ int ExampleFlexLexer::yylex()
  * another input file, and scanning continues. If it returns true (non-zero),
  * then the scanner terminates, returning 0 to its caller. */
 
-int ExampleFlexLexer::yywrap()
+int GLEFFECTSFlexLexer::yywrap()
 {
     return 1;
 }

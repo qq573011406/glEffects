@@ -31,7 +31,7 @@
    version 2.2 of Bison.  */
 
 // Take the name prefix into account.
-#define yylex   examplelex
+#define yylex   GLEFFECTSlex
 
 /* First part of user declarations.  */
 /* Line 280 of lalr1.cc  */
@@ -42,7 +42,7 @@
 #include <string>
 #include <vector>
 
-#include "expression.h"
+#include "gleffects.h"
 
 class TechniqueNode;
 
@@ -163,7 +163,7 @@ do {					\
 #define YYRECOVERING()  (!!yyerrstatus_)
 
 
-namespace example {
+namespace GLEFFECTS {
 /* Line 354 of lalr1.cc  */
 #line 169 "parser.cc"
 
@@ -1283,14 +1283,14 @@ namespace example {
   const Parser::token_number_type Parser::yyundef_token_ = 2;
 
 
-} // example
+} // GLEFFECTS
 /* Line 1142 of lalr1.cc  */
 #line 1289 "parser.cc"
 /* Line 1143 of lalr1.cc  */
 #line 216 "E:/Source/GitRepos/glEffects/src/parser.yy"
  /*** Additional Code ***/
 
-void example::Parser::error(const Parser::location_type& l,
+void GLEFFECTS::Parser::error(const Parser::location_type& l,
 			    const std::string& m)
 {
     driver.error(l, m);
