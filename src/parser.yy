@@ -59,7 +59,9 @@ class TechniqueNode;
 %union {
 	typedef std::string					_str;
 	typedef std::vector<_str*>			_strs;
-	typedef class TechniqueNode		_techNode;
+	typedef class Uniform				_uniform;
+	typedef std::vector<_uniform*>		_uniforms;
+	typedef class TechniqueNode			_techNode;
 	typedef class PassNode				_passNode;
 	typedef std::vector<_passNode*>		_passNodes;
 	typedef class CodeBlock             _codeblock;
@@ -79,13 +81,15 @@ class TechniqueNode;
 	_stateAssignmentNodeValue *stateValue;
 	_codeblock				*codeblockValue;
 	_codeblocks				*codeblockValues;
+	_uniform				*uniformValue;
+	_uniforms				*uniformValues;
 
 	int					  integerVal;
 	float				  floatVal;
 	bool 				  boolVal;
 
 }
-%token PASS TECHNIQUE
+%token PASS TECHNIQUE UNIFORMS
 %token FLOAT2 FLOAT3 FLOAT4
 %token <stringVal>  STATE_NAME STRING IDENTIFIER CODE_BLOCK
 %token <integerVal>   INTEGER;
@@ -108,10 +112,21 @@ class TechniqueNode;
 %type <stateAssignmentValues> stmt_state_list
 %type <codeblockValue>  stmt_code_block
 %type <codeblockValues> stmt_code_block_list
+%type <uniformValue>  stmt_uniform
+%type <uniformValues> stmt_uniform_list
 
 %destructor { delete $$; } IDENTIFIER
+%destructor { delete $$; } stmt_string
 %destructor { delete $$; } stmt_tec
 %destructor { delete $$; } stmt_pass
+%destructor { delete $$; } stmt_pass_list
+%destructor { delete $$; } stmt_state_value
+%destructor { delete $$; } stmt_state
+%destructor { delete $$; } stmt_state_list
+%destructor { delete $$; } stmt_code_block
+%destructor { delete $$; } stmt_code_block_list
+%destructor { delete $$; } stmt_uniform
+%destructor { delete $$; } stmt_uniform_list
 
  /*** END EXAMPLE - Change the example grammar's tokens above ***/
 
@@ -206,10 +221,31 @@ stmt_code_block: CODE_BLOCK STATE_NAME {
 					driver.tree.AddCodeBlock($$);
 				}
 
+stmt_uniform: stmt_string stmt_string ';' {
+				Uniform* value = new Uniform(*$1,*$2,"");
+				delete $1;
+				delete $2;
+				driver.tree.AddUniform(*value);
+}
+			| stmt_string stmt_string ':' stmt_string ';' {
+				Uniform* value = new Uniform(*$1,*$2,*$4);
+				delete $1;
+				delete $2;
+				delete $4;
+				driver.tree.AddUniform(*value);
+
+}
+
+stmt_uniform_list:  {}
+				| stmt_uniform {}
+				| stmt_uniform stmt_uniform_list {}
+
 stmt_code_block_list: stmt_code_block {}
 					| stmt_code_block stmt_code_block_list {}
 
-start:   stmt_code_block_list stmt_tec_list {}
+stmt_uniform_block:  UNIFORMS '{' stmt_uniform_list '}' 
+
+start:   stmt_uniform_block stmt_code_block_list stmt_tec_list {}
 
  /*** END EXAMPLE - Change the example grammar rules above ***/
 

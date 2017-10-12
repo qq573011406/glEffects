@@ -56,7 +56,7 @@ class TechniqueNode;
 
 /* User implementation prologue.  */
 /* Line 286 of lalr1.cc  */
-#line 118 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 133 "E:/Source/GitRepos/glEffects/src/parser.yy"
 
 
 #include "driver.h"
@@ -267,26 +267,89 @@ namespace GLEFFECTS {
 
     switch (yytype)
       {
-        case 10: /* IDENTIFIER */
+        case 11: /* IDENTIFIER */
 /* Line 456 of lalr1.cc  */
-#line 112 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 118 "E:/Source/GitRepos/glEffects/src/parser.yy"
         { delete ((*yyvaluep).stringVal); };
 /* Line 456 of lalr1.cc  */
 #line 276 "parser.cc"
         break;
-      case 34: /* stmt_pass */
+      case 31: /* stmt_string */
 /* Line 456 of lalr1.cc  */
-#line 114 "E:/Source/GitRepos/glEffects/src/parser.yy"
-        { delete ((*yyvaluep).passValue); };
+#line 119 "E:/Source/GitRepos/glEffects/src/parser.yy"
+        { delete ((*yyvaluep).stringVal); };
 /* Line 456 of lalr1.cc  */
 #line 283 "parser.cc"
         break;
-      case 36: /* stmt_tec */
+      case 32: /* stmt_state_value */
 /* Line 456 of lalr1.cc  */
-#line 113 "E:/Source/GitRepos/glEffects/src/parser.yy"
-        { delete ((*yyvaluep).techValue); };
+#line 123 "E:/Source/GitRepos/glEffects/src/parser.yy"
+        { delete ((*yyvaluep).stateValue); };
 /* Line 456 of lalr1.cc  */
 #line 290 "parser.cc"
+        break;
+      case 34: /* stmt_state */
+/* Line 456 of lalr1.cc  */
+#line 124 "E:/Source/GitRepos/glEffects/src/parser.yy"
+        { delete ((*yyvaluep).stateAssignmentValue); };
+/* Line 456 of lalr1.cc  */
+#line 297 "parser.cc"
+        break;
+      case 35: /* stmt_state_list */
+/* Line 456 of lalr1.cc  */
+#line 125 "E:/Source/GitRepos/glEffects/src/parser.yy"
+        { delete ((*yyvaluep).stateAssignmentValues); };
+/* Line 456 of lalr1.cc  */
+#line 304 "parser.cc"
+        break;
+      case 36: /* stmt_pass */
+/* Line 456 of lalr1.cc  */
+#line 121 "E:/Source/GitRepos/glEffects/src/parser.yy"
+        { delete ((*yyvaluep).passValue); };
+/* Line 456 of lalr1.cc  */
+#line 311 "parser.cc"
+        break;
+      case 37: /* stmt_pass_list */
+/* Line 456 of lalr1.cc  */
+#line 122 "E:/Source/GitRepos/glEffects/src/parser.yy"
+        { delete ((*yyvaluep).passValues); };
+/* Line 456 of lalr1.cc  */
+#line 318 "parser.cc"
+        break;
+      case 38: /* stmt_tec */
+/* Line 456 of lalr1.cc  */
+#line 120 "E:/Source/GitRepos/glEffects/src/parser.yy"
+        { delete ((*yyvaluep).techValue); };
+/* Line 456 of lalr1.cc  */
+#line 325 "parser.cc"
+        break;
+      case 40: /* stmt_code_block */
+/* Line 456 of lalr1.cc  */
+#line 126 "E:/Source/GitRepos/glEffects/src/parser.yy"
+        { delete ((*yyvaluep).codeblockValue); };
+/* Line 456 of lalr1.cc  */
+#line 332 "parser.cc"
+        break;
+      case 41: /* stmt_uniform */
+/* Line 456 of lalr1.cc  */
+#line 128 "E:/Source/GitRepos/glEffects/src/parser.yy"
+        { delete ((*yyvaluep).uniformValue); };
+/* Line 456 of lalr1.cc  */
+#line 339 "parser.cc"
+        break;
+      case 42: /* stmt_uniform_list */
+/* Line 456 of lalr1.cc  */
+#line 129 "E:/Source/GitRepos/glEffects/src/parser.yy"
+        { delete ((*yyvaluep).uniformValues); };
+/* Line 456 of lalr1.cc  */
+#line 346 "parser.cc"
+        break;
+      case 43: /* stmt_code_block_list */
+/* Line 456 of lalr1.cc  */
+#line 127 "E:/Source/GitRepos/glEffects/src/parser.yy"
+        { delete ((*yyvaluep).codeblockValues); };
+/* Line 456 of lalr1.cc  */
+#line 353 "parser.cc"
         break;
 
 	default:
@@ -387,7 +450,7 @@ namespace GLEFFECTS {
     yylloc.begin.filename = yylloc.end.filename = &driver.streamname;
 }
 /* Line 546 of lalr1.cc  */
-#line 391 "parser.cc"
+#line 454 "parser.cc"
 
     /* Initialize the stacks.  The initial state will be pushed in
        yynewstate, since the latter expects the semantical and the
@@ -507,73 +570,73 @@ namespace GLEFFECTS {
       {
           case 2:
 /* Line 671 of lalr1.cc  */
-#line 135 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 150 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.floatVal) = (yysemantic_stack_[(1) - (1)].floatVal);}
     break;
 
   case 3:
 /* Line 671 of lalr1.cc  */
-#line 136 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 151 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.floatVal) = (yysemantic_stack_[(1) - (1)].integerVal);}
     break;
 
   case 4:
 /* Line 671 of lalr1.cc  */
-#line 138 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 153 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.stringVal) = (yysemantic_stack_[(1) - (1)].stringVal);}
     break;
 
   case 5:
 /* Line 671 of lalr1.cc  */
-#line 139 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 154 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.stringVal) = (yysemantic_stack_[(1) - (1)].stringVal);}
     break;
 
   case 6:
 /* Line 671 of lalr1.cc  */
-#line 140 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 155 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.stringVal) = (yysemantic_stack_[(1) - (1)].stringVal);}
     break;
 
   case 7:
 /* Line 671 of lalr1.cc  */
-#line 143 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 158 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.stateValue) = new StateIntegerValue((yysemantic_stack_[(1) - (1)].integerVal));}
     break;
 
   case 8:
 /* Line 671 of lalr1.cc  */
-#line 144 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 159 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.stateValue) = new StateFloatValue((yysemantic_stack_[(1) - (1)].floatVal));}
     break;
 
   case 9:
 /* Line 671 of lalr1.cc  */
-#line 145 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 160 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.stateValue) = new StateBooleanValue((yysemantic_stack_[(1) - (1)].boolVal));}
     break;
 
   case 10:
 /* Line 671 of lalr1.cc  */
-#line 146 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 161 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.stateValue) = new StateStringValue(*(yysemantic_stack_[(1) - (1)].stringVal));delete (yysemantic_stack_[(1) - (1)].stringVal);}
     break;
 
   case 11:
 /* Line 671 of lalr1.cc  */
-#line 147 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 162 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.stateValue) = new StateCompileValue(*(yysemantic_stack_[(5) - (2)].stringVal),*(yysemantic_stack_[(5) - (3)].stringVal));delete (yysemantic_stack_[(5) - (2)].stringVal);delete (yysemantic_stack_[(5) - (3)].stringVal);}
     break;
 
   case 12:
 /* Line 671 of lalr1.cc  */
-#line 148 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 163 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.stateValue) = new StateCompileValue(*(yysemantic_stack_[(5) - (2)].stringVal),*(yysemantic_stack_[(5) - (3)].stringVal));delete (yysemantic_stack_[(5) - (2)].stringVal);delete (yysemantic_stack_[(5) - (3)].stringVal);}
     break;
 
   case 13:
 /* Line 671 of lalr1.cc  */
-#line 149 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 164 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {
 					float temp[2] = {(yysemantic_stack_[(6) - (3)].floatVal),(yysemantic_stack_[(6) - (5)].floatVal)};
 					(yyval.stateValue) = new StateFloat2Value(temp);
@@ -582,7 +645,7 @@ namespace GLEFFECTS {
 
   case 14:
 /* Line 671 of lalr1.cc  */
-#line 153 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 168 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {
 					float temp[3] = {(yysemantic_stack_[(8) - (3)].floatVal),(yysemantic_stack_[(8) - (5)].floatVal),(yysemantic_stack_[(8) - (7)].floatVal)};
 					(yyval.stateValue) = new StateFloat3Value(temp);
@@ -591,7 +654,7 @@ namespace GLEFFECTS {
 
   case 15:
 /* Line 671 of lalr1.cc  */
-#line 157 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 172 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {
 					float temp[4] = {(yysemantic_stack_[(10) - (3)].floatVal),(yysemantic_stack_[(10) - (5)].floatVal),(yysemantic_stack_[(10) - (7)].floatVal),(yysemantic_stack_[(10) - (9)].floatVal)};
 					(yyval.stateValue) = new StateFloat4Value(temp);
@@ -600,31 +663,31 @@ namespace GLEFFECTS {
 
   case 16:
 /* Line 671 of lalr1.cc  */
-#line 163 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 178 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.integerVal) = (yysemantic_stack_[(3) - (2)].integerVal);}
     break;
 
   case 17:
 /* Line 671 of lalr1.cc  */
-#line 165 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 180 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.stateAssignmentValue) = new StateAssignmentNode(*(yysemantic_stack_[(4) - (1)].stringVal),(yysemantic_stack_[(4) - (3)].stateValue),-1);delete (yysemantic_stack_[(4) - (1)].stringVal);}
     break;
 
   case 18:
 /* Line 671 of lalr1.cc  */
-#line 166 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 181 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.stateAssignmentValue) = new StateAssignmentNode(*(yysemantic_stack_[(5) - (1)].stringVal),(yysemantic_stack_[(5) - (4)].stateValue),(yysemantic_stack_[(5) - (2)].integerVal));delete (yysemantic_stack_[(5) - (1)].stringVal);}
     break;
 
   case 19:
 /* Line 671 of lalr1.cc  */
-#line 168 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 183 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.stateAssignmentValues) = new std::vector<StateAssignmentNode*>();}
     break;
 
   case 20:
 /* Line 671 of lalr1.cc  */
-#line 169 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 184 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {
 												(yyval.stateAssignmentValues) = new std::vector<StateAssignmentNode*>();
 												(yyval.stateAssignmentValues)->push_back((yysemantic_stack_[(2) - (1)].stateAssignmentValue));
@@ -635,19 +698,19 @@ namespace GLEFFECTS {
 
   case 21:
 /* Line 671 of lalr1.cc  */
-#line 176 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 191 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.passValue) = new PassNode(*(yysemantic_stack_[(5) - (2)].stringVal),*(yysemantic_stack_[(5) - (4)].stateAssignmentValues));delete (yysemantic_stack_[(5) - (2)].stringVal);}
     break;
 
   case 22:
 /* Line 671 of lalr1.cc  */
-#line 178 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 193 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {(yyval.passValues) = new std::vector<PassNode*>();(yyval.passValues)->push_back((yysemantic_stack_[(1) - (1)].passValue));}
     break;
 
   case 23:
 /* Line 671 of lalr1.cc  */
-#line 179 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 194 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {
 											(yyval.passValues) = new std::vector<PassNode*>();
 											(yyval.passValues)->push_back((yysemantic_stack_[(2) - (1)].passValue));
@@ -658,7 +721,7 @@ namespace GLEFFECTS {
 
   case 24:
 /* Line 671 of lalr1.cc  */
-#line 186 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 201 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {
                                                                 (yyval.techValue) = new TechniqueNode(*(yysemantic_stack_[(5) - (2)].stringVal),*(yysemantic_stack_[(5) - (4)].passValues));
 																driver.tree.AddTechnique(*(yyval.techValue));
@@ -669,19 +732,19 @@ namespace GLEFFECTS {
 
   case 25:
 /* Line 671 of lalr1.cc  */
-#line 193 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 208 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {}
     break;
 
   case 26:
 /* Line 671 of lalr1.cc  */
-#line 194 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 209 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {}
     break;
 
   case 27:
 /* Line 671 of lalr1.cc  */
-#line 196 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 211 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {
 					(yyval.codeblockValue) = new CodeBlock(*(yysemantic_stack_[(2) - (2)].stringVal),*(yysemantic_stack_[(2) - (1)].stringVal));
 					delete (yysemantic_stack_[(2) - (2)].stringVal);
@@ -692,7 +755,7 @@ namespace GLEFFECTS {
 
   case 28:
 /* Line 671 of lalr1.cc  */
-#line 202 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 217 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {
 					(yyval.codeblockValue) = new CodeBlock(*(yysemantic_stack_[(2) - (2)].stringVal),*(yysemantic_stack_[(2) - (1)].stringVal));
 					delete (yysemantic_stack_[(2) - (2)].stringVal);
@@ -703,25 +766,67 @@ namespace GLEFFECTS {
 
   case 29:
 /* Line 671 of lalr1.cc  */
-#line 209 "E:/Source/GitRepos/glEffects/src/parser.yy"
-    {}
+#line 224 "E:/Source/GitRepos/glEffects/src/parser.yy"
+    {
+				Uniform* value = new Uniform(*(yysemantic_stack_[(3) - (1)].stringVal),*(yysemantic_stack_[(3) - (2)].stringVal),"");
+				delete (yysemantic_stack_[(3) - (1)].stringVal);
+				delete (yysemantic_stack_[(3) - (2)].stringVal);
+				driver.tree.AddUniform(*value);
+}
     break;
 
   case 30:
 /* Line 671 of lalr1.cc  */
-#line 210 "E:/Source/GitRepos/glEffects/src/parser.yy"
-    {}
+#line 230 "E:/Source/GitRepos/glEffects/src/parser.yy"
+    {
+				Uniform* value = new Uniform(*(yysemantic_stack_[(5) - (1)].stringVal),*(yysemantic_stack_[(5) - (2)].stringVal),*(yysemantic_stack_[(5) - (4)].stringVal));
+				delete (yysemantic_stack_[(5) - (1)].stringVal);
+				delete (yysemantic_stack_[(5) - (2)].stringVal);
+				delete (yysemantic_stack_[(5) - (4)].stringVal);
+				driver.tree.AddUniform(*value);
+
+}
     break;
 
   case 31:
 /* Line 671 of lalr1.cc  */
-#line 212 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 239 "E:/Source/GitRepos/glEffects/src/parser.yy"
+    {}
+    break;
+
+  case 32:
+/* Line 671 of lalr1.cc  */
+#line 240 "E:/Source/GitRepos/glEffects/src/parser.yy"
+    {}
+    break;
+
+  case 33:
+/* Line 671 of lalr1.cc  */
+#line 241 "E:/Source/GitRepos/glEffects/src/parser.yy"
+    {}
+    break;
+
+  case 34:
+/* Line 671 of lalr1.cc  */
+#line 243 "E:/Source/GitRepos/glEffects/src/parser.yy"
+    {}
+    break;
+
+  case 35:
+/* Line 671 of lalr1.cc  */
+#line 244 "E:/Source/GitRepos/glEffects/src/parser.yy"
+    {}
+    break;
+
+  case 37:
+/* Line 671 of lalr1.cc  */
+#line 248 "E:/Source/GitRepos/glEffects/src/parser.yy"
     {}
     break;
 
 
 /* Line 671 of lalr1.cc  */
-#line 725 "parser.cc"
+#line 830 "parser.cc"
       default:
         break;
       }
@@ -1021,18 +1126,20 @@ namespace GLEFFECTS {
 
   /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
      STATE-NUM.  */
-  const signed char Parser::yypact_ninf_ = -47;
+  const signed char Parser::yypact_ninf_ = -57;
   const signed char
   Parser::yypact_[] =
   {
-        12,    11,    12,     4,    27,   -47,   -47,   -47,    20,     4,
-     -47,   -47,     9,   -47,    30,    25,    30,    10,    13,   -47,
-     -47,    29,    -1,    29,    14,    31,    -3,    16,   -47,   -47,
-      22,    23,    24,    28,   -47,   -47,   -47,   -47,   -47,   -47,
-       8,   -47,    21,    -3,   -47,    19,    19,    19,    18,   -47,
-      26,   -47,   -47,    32,    33,    34,    38,    39,   -47,    19,
-      19,    19,    40,    41,    36,    42,    43,   -47,   -47,   -47,
-      19,    19,    44,    46,   -47,    19,    47,   -47
+        -4,   -16,     1,    20,    -3,     0,     1,    21,   -57,   -57,
+     -57,   -57,    -3,    -3,    -1,   -57,   -57,   -57,    13,    21,
+     -57,   -23,   -57,   -57,     3,   -57,   -57,    -3,    28,     8,
+      23,    28,    11,   -57,    14,   -57,   -57,    26,   -10,    26,
+      12,    24,    39,    18,   -57,   -57,    33,    17,    32,    38,
+     -57,   -57,   -57,    -3,   -57,    34,    39,   -57,     9,     9,
+       9,    10,   -57,    35,   -57,   -57,    41,    42,    43,    47,
+      48,   -57,     9,     9,     9,    25,    40,    45,    49,    50,
+     -57,   -57,   -57,     9,     9,    46,    51,   -57,     9,    52,
+     -57
   };
 
   /* YYDEFACT[S] -- default reduction number in state S.  Performed when
@@ -1041,30 +1148,32 @@ namespace GLEFFECTS {
   const unsigned char
   Parser::yydefact_[] =
   {
-         0,     0,    29,     0,     0,    27,    28,    30,     0,    25,
-      31,     1,     0,    26,     0,     0,    22,     0,     0,    23,
-      24,    19,     0,    19,     0,     0,     0,     0,    20,    21,
-       0,     0,     0,     0,     5,     4,     6,     7,     8,     9,
-       0,    10,     0,     0,    16,     0,     0,     0,     0,    17,
-       0,     3,     2,     0,     0,     0,     0,     0,    18,     0,
-       0,     0,     0,     0,     0,     0,     0,    12,    11,    13,
-       0,     0,     0,     0,    14,     0,     0,    15
+         0,     0,     0,     0,    31,     0,    34,     0,     1,     5,
+       4,     6,     0,    31,     0,    27,    28,    35,     0,    25,
+      37,     0,    33,    36,     0,    26,    29,     0,     0,     0,
+       0,    22,     0,    30,     0,    23,    24,    19,     0,    19,
+       0,     0,     0,     0,    20,    21,     0,     0,     0,     0,
+       7,     8,     9,     0,    10,     0,     0,    16,     0,     0,
+       0,     0,    17,     0,     3,     2,     0,     0,     0,     0,
+       0,    18,     0,     0,     0,     0,     0,     0,     0,     0,
+      12,    11,    13,     0,     0,     0,     0,    14,     0,     0,
+      15
   };
 
   /* YYPGOTO[NTERM-NUM].  */
   const signed char
   Parser::yypgoto_[] =
   {
-       -47,   -46,     7,     5,   -47,   -47,    37,   -47,    50,   -47,
-      54,   -47,    57,   -47
+       -57,   -56,   -12,    16,   -57,   -57,    29,   -57,    44,   -57,
+      55,   -57,   -57,    63,    71,   -57,   -57
   };
 
   /* YYDEFGOTO[NTERM-NUM].  */
   const signed char
   Parser::yydefgoto_[] =
   {
-        -1,    53,    41,    42,    27,    23,    24,    16,    17,     9,
-      10,     2,     3,     4
+        -1,    66,    12,    55,    43,    39,    40,    31,    32,    19,
+      20,     6,    13,    14,     7,     2,     3
   };
 
   /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -1074,26 +1183,28 @@ namespace GLEFFECTS {
   const unsigned char
   Parser::yytable_[] =
   {
-        54,    55,    31,    32,    33,    34,    35,    36,     8,    37,
-      38,    39,    40,    64,    65,    66,    34,    35,    36,     5,
-      25,     6,    26,     1,    72,    73,    56,    11,    57,    76,
-      12,    51,    52,    15,    14,    18,    20,    22,    21,    43,
-      29,    45,    46,    30,    44,    49,    47,    48,    50,     0,
-      58,    59,    60,    61,    62,    63,    69,    67,    68,     7,
-      28,    70,    71,    13,    74,    75,    19,    77
+        21,     1,    26,    67,    68,    27,     9,    10,    11,    15,
+       4,    16,    41,     5,    42,    29,    77,    78,    79,    69,
+       8,    70,    64,    65,    24,    18,    23,    85,    86,    28,
+      54,    30,    89,    33,    34,    38,    58,    46,    36,    45,
+      37,    61,    56,    80,    54,    47,    48,    49,     9,    10,
+      11,    59,    50,    51,    52,    53,    57,    60,    81,    62,
+      71,    72,    73,    74,    75,    76,    82,    87,    44,    83,
+      84,    88,    63,    90,    25,    35,    22,    17
   };
 
   /* YYCHECK.  */
-  const signed char
+  const unsigned char
   Parser::yycheck_[] =
   {
-        46,    47,     5,     6,     7,     8,     9,    10,     4,    12,
-      13,    14,    15,    59,    60,    61,     8,     9,    10,     8,
-      21,    10,    23,    11,    70,    71,     8,     0,    10,    75,
-      10,    12,    13,     3,    25,    10,    26,     8,    25,    23,
-      26,    18,    18,    12,    22,    24,    18,    40,    43,    -1,
-      24,    19,    19,    19,    16,    16,    20,    17,    17,     2,
-      23,    19,    19,     9,    20,    19,    16,    20
+        12,     5,    25,    59,    60,    28,     9,    10,    11,     9,
+      26,    11,    22,    12,    24,    27,    72,    73,    74,     9,
+       0,    11,    13,    14,    11,     4,    27,    83,    84,    26,
+      42,     3,    88,    25,    11,     9,    19,    13,    27,    27,
+      26,    53,    24,    18,    56,     6,     7,     8,     9,    10,
+      11,    19,    13,    14,    15,    16,    23,    19,    18,    25,
+      25,    20,    20,    20,    17,    17,    21,    21,    39,    20,
+      20,    20,    56,    21,    19,    31,    13,     6
   };
 
   /* STOS_[STATE-NUM] -- The (internal number of the) accessing
@@ -1101,14 +1212,16 @@ namespace GLEFFECTS {
   const unsigned char
   Parser::yystos_[] =
   {
-         0,    11,    38,    39,    40,     8,    10,    39,     4,    36,
-      37,     0,    10,    37,    25,     3,    34,    35,    10,    35,
-      26,    25,     8,    32,    33,    21,    23,    31,    33,    26,
-      12,     5,     6,     7,     8,     9,    10,    12,    13,    14,
-      15,    29,    30,    23,    22,    18,    18,    18,    29,    24,
-      30,    12,    13,    28,    28,    28,     8,    10,    24,    19,
-      19,    19,    16,    16,    28,    28,    28,    17,    17,    20,
-      19,    19,    28,    28,    20,    19,    28,    20
+         0,     5,    44,    45,    26,    12,    40,    43,     0,     9,
+      10,    11,    31,    41,    42,     9,    11,    43,     4,    38,
+      39,    31,    42,    27,    11,    39,    25,    28,    26,    31,
+       3,    36,    37,    25,    11,    37,    27,    26,     9,    34,
+      35,    22,    24,    33,    35,    27,    13,     6,     7,     8,
+      13,    14,    15,    16,    31,    32,    24,    23,    19,    19,
+      19,    31,    25,    32,    13,    14,    30,    30,    30,     9,
+      11,    25,    20,    20,    20,    17,    17,    30,    30,    30,
+      18,    18,    21,    20,    20,    30,    30,    21,    20,    30,
+      21
   };
 
 #if YYDEBUG
@@ -1118,8 +1231,8 @@ namespace GLEFFECTS {
   Parser::yytoken_number_[] =
   {
          0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270,    40,    41,    60,    44,
-      62,    91,    93,    61,    59,   123,   125
+     265,   266,   267,   268,   269,   270,   271,    40,    41,    60,
+      44,    62,    91,    93,    61,    59,   123,   125,    58
   };
 #endif
 
@@ -1127,10 +1240,10 @@ namespace GLEFFECTS {
   const unsigned char
   Parser::yyr1_[] =
   {
-         0,    27,    28,    28,    29,    29,    29,    30,    30,    30,
-      30,    30,    30,    30,    30,    30,    31,    32,    32,    33,
-      33,    34,    35,    35,    36,    37,    37,    38,    38,    39,
-      39,    40
+         0,    29,    30,    30,    31,    31,    31,    32,    32,    32,
+      32,    32,    32,    32,    32,    32,    33,    34,    34,    35,
+      35,    36,    37,    37,    38,    39,    39,    40,    40,    41,
+      41,    42,    42,    42,    43,    43,    44,    45
   };
 
   /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
@@ -1139,8 +1252,8 @@ namespace GLEFFECTS {
   {
          0,     2,     1,     1,     1,     1,     1,     1,     1,     1,
        1,     5,     5,     6,     8,    10,     3,     4,     5,     0,
-       2,     5,     1,     2,     5,     1,     2,     2,     2,     1,
-       2,     2
+       2,     5,     1,     2,     5,     1,     2,     2,     2,     3,
+       5,     0,     1,     2,     1,     2,     4,     3
   };
 
 
@@ -1149,13 +1262,15 @@ namespace GLEFFECTS {
   const char*
   const Parser::yytname_[] =
   {
-    "END", "error", "$undefined", "PASS", "TECHNIQUE", "FLOAT2", "FLOAT3",
-  "FLOAT4", "STATE_NAME", "STRING", "IDENTIFIER", "CODE_BLOCK", "INTEGER",
-  "FLOAT", "BOOLEAN", "COMPILE", "'('", "')'", "'<'", "','", "'>'", "'['",
-  "']'", "'='", "';'", "'{'", "'}'", "$accept", "stmt_float",
-  "stmt_string", "stmt_state_value", "stmt_state_name_index", "stmt_state",
-  "stmt_state_list", "stmt_pass", "stmt_pass_list", "stmt_tec",
-  "stmt_tec_list", "stmt_code_block", "stmt_code_block_list", "start", YY_NULL
+    "END", "error", "$undefined", "PASS", "TECHNIQUE", "UNIFORMS", "FLOAT2",
+  "FLOAT3", "FLOAT4", "STATE_NAME", "STRING", "IDENTIFIER", "CODE_BLOCK",
+  "INTEGER", "FLOAT", "BOOLEAN", "COMPILE", "'('", "')'", "'<'", "','",
+  "'>'", "'['", "']'", "'='", "';'", "'{'", "'}'", "':'", "$accept",
+  "stmt_float", "stmt_string", "stmt_state_value", "stmt_state_name_index",
+  "stmt_state", "stmt_state_list", "stmt_pass", "stmt_pass_list",
+  "stmt_tec", "stmt_tec_list", "stmt_code_block", "stmt_uniform",
+  "stmt_uniform_list", "stmt_code_block_list", "stmt_uniform_block",
+  "start", YY_NULL
   };
 
 #if YYDEBUG
@@ -1163,18 +1278,20 @@ namespace GLEFFECTS {
   const Parser::rhs_number_type
   Parser::yyrhs_[] =
   {
-        40,     0,    -1,    13,    -1,    12,    -1,     9,    -1,     8,
-      -1,    10,    -1,    12,    -1,    13,    -1,    14,    -1,    29,
-      -1,    15,    29,    10,    16,    17,    -1,    15,    29,     8,
-      16,    17,    -1,     5,    18,    28,    19,    28,    20,    -1,
-       6,    18,    28,    19,    28,    19,    28,    20,    -1,     7,
-      18,    28,    19,    28,    19,    28,    19,    28,    20,    -1,
-      21,    12,    22,    -1,     8,    23,    30,    24,    -1,     8,
-      31,    23,    30,    24,    -1,    -1,    32,    33,    -1,     3,
-      10,    25,    33,    26,    -1,    34,    -1,    34,    35,    -1,
-       4,    10,    25,    35,    26,    -1,    36,    -1,    36,    37,
-      -1,    11,     8,    -1,    11,    10,    -1,    38,    -1,    38,
-      39,    -1,    39,    37,    -1
+        45,     0,    -1,    14,    -1,    13,    -1,    10,    -1,     9,
+      -1,    11,    -1,    13,    -1,    14,    -1,    15,    -1,    31,
+      -1,    16,    31,    11,    17,    18,    -1,    16,    31,     9,
+      17,    18,    -1,     6,    19,    30,    20,    30,    21,    -1,
+       7,    19,    30,    20,    30,    20,    30,    21,    -1,     8,
+      19,    30,    20,    30,    20,    30,    20,    30,    21,    -1,
+      22,    13,    23,    -1,     9,    24,    32,    25,    -1,     9,
+      33,    24,    32,    25,    -1,    -1,    34,    35,    -1,     3,
+      11,    26,    35,    27,    -1,    36,    -1,    36,    37,    -1,
+       4,    11,    26,    37,    27,    -1,    38,    -1,    38,    39,
+      -1,    12,     9,    -1,    12,    11,    -1,    31,    31,    25,
+      -1,    31,    31,    28,    31,    25,    -1,    -1,    41,    -1,
+      41,    42,    -1,    40,    -1,    40,    43,    -1,     5,    26,
+      42,    27,    -1,    44,    43,    39,    -1
   };
 
   /* YYPRHS[YYN] -- Index of the first RHS symbol of rule number YYN in
@@ -1185,17 +1302,17 @@ namespace GLEFFECTS {
          0,     0,     3,     5,     7,     9,    11,    13,    15,    17,
       19,    21,    27,    33,    40,    49,    60,    64,    69,    75,
       76,    79,    85,    87,    90,    96,    98,   101,   104,   107,
-     109,   112
+     111,   117,   118,   120,   123,   125,   128,   133
   };
 
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
   const unsigned char
   Parser::yyrline_[] =
   {
-         0,   135,   135,   136,   138,   139,   140,   143,   144,   145,
-     146,   147,   148,   149,   153,   157,   163,   165,   166,   168,
-     169,   176,   178,   179,   186,   193,   194,   196,   202,   209,
-     210,   212
+         0,   150,   150,   151,   153,   154,   155,   158,   159,   160,
+     161,   162,   163,   164,   168,   172,   178,   180,   181,   183,
+     184,   191,   193,   194,   201,   208,   209,   211,   217,   224,
+     230,   239,   240,   241,   243,   244,   246,   248
   };
 
   // Print the state stack on the debug stream.
@@ -1239,15 +1356,15 @@ namespace GLEFFECTS {
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-      16,    17,     2,     2,    19,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,    24,
-      18,    23,    20,     2,     2,     2,     2,     2,     2,     2,
+      17,    18,     2,     2,    20,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,    28,    25,
+      19,    24,    21,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,    21,     2,    22,     2,     2,     2,     2,     2,     2,
+       2,    22,     2,    23,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,    25,     2,    26,     2,     2,     2,     2,
+       2,     2,     2,    26,     2,    27,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -1262,7 +1379,7 @@ namespace GLEFFECTS {
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15
+      15,    16
     };
     if ((unsigned int) t <= yyuser_token_number_max_)
       return translate_table[t];
@@ -1271,23 +1388,23 @@ namespace GLEFFECTS {
   }
 
   const int Parser::yyeof_ = 0;
-  const int Parser::yylast_ = 67;
-  const int Parser::yynnts_ = 14;
+  const int Parser::yylast_ = 77;
+  const int Parser::yynnts_ = 17;
   const int Parser::yyempty_ = -2;
-  const int Parser::yyfinal_ = 11;
+  const int Parser::yyfinal_ = 8;
   const int Parser::yyterror_ = 1;
   const int Parser::yyerrcode_ = 256;
-  const int Parser::yyntokens_ = 27;
+  const int Parser::yyntokens_ = 29;
 
-  const unsigned int Parser::yyuser_token_number_max_ = 270;
+  const unsigned int Parser::yyuser_token_number_max_ = 271;
   const Parser::token_number_type Parser::yyundef_token_ = 2;
 
 
 } // GLEFFECTS
 /* Line 1142 of lalr1.cc  */
-#line 1289 "parser.cc"
+#line 1406 "parser.cc"
 /* Line 1143 of lalr1.cc  */
-#line 216 "E:/Source/GitRepos/glEffects/src/parser.yy"
+#line 252 "E:/Source/GitRepos/glEffects/src/parser.yy"
  /*** Additional Code ***/
 
 void GLEFFECTS::Parser::error(const Parser::location_type& l,

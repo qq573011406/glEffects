@@ -71,7 +71,9 @@ namespace GLEFFECTS {
 
 	typedef std::string					_str;
 	typedef std::vector<_str*>			_strs;
-	typedef class TechniqueNode		_techNode;
+	typedef class Uniform				_uniform;
+	typedef std::vector<_uniform*>		_uniforms;
+	typedef class TechniqueNode			_techNode;
 	typedef class PassNode				_passNode;
 	typedef std::vector<_passNode*>		_passNodes;
 	typedef class CodeBlock             _codeblock;
@@ -91,6 +93,8 @@ namespace GLEFFECTS {
 	_stateAssignmentNodeValue *stateValue;
 	_codeblock				*codeblockValue;
 	_codeblocks				*codeblockValues;
+	_uniform				*uniformValue;
+	_uniforms				*uniformValues;
 
 	int					  integerVal;
 	float				  floatVal;
@@ -99,7 +103,7 @@ namespace GLEFFECTS {
 
 
 /* Line 33 of lalr1.cc  */
-#line 103 "parser.h"
+#line 107 "parser.h"
     };
 #else
     typedef YYSTYPE semantic_type;
@@ -114,17 +118,18 @@ namespace GLEFFECTS {
      END = 0,
      PASS = 258,
      TECHNIQUE = 259,
-     FLOAT2 = 260,
-     FLOAT3 = 261,
-     FLOAT4 = 262,
-     STATE_NAME = 263,
-     STRING = 264,
-     IDENTIFIER = 265,
-     CODE_BLOCK = 266,
-     INTEGER = 267,
-     FLOAT = 268,
-     BOOLEAN = 269,
-     COMPILE = 270
+     UNIFORMS = 260,
+     FLOAT2 = 261,
+     FLOAT3 = 262,
+     FLOAT4 = 263,
+     STATE_NAME = 264,
+     STRING = 265,
+     IDENTIFIER = 266,
+     CODE_BLOCK = 267,
+     INTEGER = 268,
+     FLOAT = 269,
+     BOOLEAN = 270,
+     COMPILE = 271
    };
 
     };
@@ -229,7 +234,7 @@ namespace GLEFFECTS {
     static const unsigned char yytable_[];
     static const signed char yytable_ninf_;
 
-    static const signed char yycheck_[];
+    static const unsigned char yycheck_[];
 
     /// For a state, its accessing symbol.
     static const unsigned char yystos_[];
@@ -302,7 +307,7 @@ namespace GLEFFECTS {
 
 } // GLEFFECTS
 /* Line 33 of lalr1.cc  */
-#line 306 "parser.h"
+#line 311 "parser.h"
 
 
 

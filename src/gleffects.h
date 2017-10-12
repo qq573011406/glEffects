@@ -331,6 +331,26 @@ private:
 	std::string m_Code;
 };
 
+class Uniform
+{
+public:
+	Uniform(std::string name, std::string type, std::string semantic)
+	{
+		m_Name = name;
+		m_Type = type;
+		m_Semantic = semantic;
+	}
+	~Uniform() {};
+
+	const std::string getName()const { return m_Name; }
+	const std::string getType()const { return m_Type; }
+	const std::string getSemantic()const { return m_Semantic; }
+
+private:
+	std::string m_Name;
+	std::string m_Type;
+	std::string m_Semantic;
+};
 
 
 
@@ -351,11 +371,18 @@ public:
 			delete block;
 		}
 		m_CodeBlocks.clear();
+
+		for (auto uniform : m_Uniforms)
+		{
+			delete uniform;
+		}
+		m_Uniforms.clear();
 	}
+	const std::vector<Uniform*> getUniforms() const { return m_Uniforms; }
 	const std::vector<CodeBlock*> getCodeBlocks() const { return m_CodeBlocks; }
 	const std::vector<TechniqueNode*> getTechiques() const { return m_Techniques; }
 	void AddTechnique(TechniqueNode& technique) { m_Techniques.push_back(&technique); }
-
+	void AddUniform(Uniform& uniform) { m_Uniforms.push_back(&uniform); }
 	void AddCodeBlock(CodeBlock* block)
 	{
 		m_CodeBlocks.push_back(block);
@@ -363,6 +390,7 @@ public:
 private:
 	std::vector<TechniqueNode*> m_Techniques;
 	std::vector<CodeBlock*> m_CodeBlocks;
+	std::vector<Uniform*> m_Uniforms;
 };
 
 

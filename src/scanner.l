@@ -86,6 +86,7 @@ es_all_states {es_light_states}|{es_material_states}|{es_render_states}|{es_samp
     yylloc->step();
 %}
 
+"Unifroms" {return token::UNIFORMS;}
 
 "#CODEBLOCK_BEGIN"  {
         BEGIN(PARSE_STATE_CODEBLOCK);

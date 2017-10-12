@@ -97,6 +97,12 @@ bool test_file(std::string filePath, bool p, bool s, bool v)
 
 	bool result = driver.parse_stream(infile,filePath);
 	if (result && v) {
+
+		std::cout << "Uniforms:" << std::endl;
+
+
+
+
 		std::cout << "CodeBlocks:" << std::endl;
 
 		auto codeblocks = tree.getCodeBlocks();
