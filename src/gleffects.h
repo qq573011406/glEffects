@@ -334,7 +334,7 @@ private:
 class Uniform
 {
 public:
-	Uniform(std::string name, std::string type, std::string semantic)
+	Uniform(std::string type, std::string name, std::string semantic)
 	{
 		m_Name = name;
 		m_Type = type;

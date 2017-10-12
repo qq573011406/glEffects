@@ -99,9 +99,17 @@ bool test_file(std::string filePath, bool p, bool s, bool v)
 	if (result && v) {
 
 		std::cout << "Uniforms:" << std::endl;
+		auto uniforms = tree.getUniforms();
+		for (auto uniform : uniforms)
+		{
+			std::cout <<uniform->getType() << " "  <<uniform->getName();
+			if (uniform->getSemantic() != "") {
+				std::cout << ":" << uniform->getSemantic();
+			}
+			std::cout << ";\n";
+		}
 
-
-
+		std::cout << "\n\n";
 
 		std::cout << "CodeBlocks:" << std::endl;
 
