@@ -18,19 +18,19 @@
 
 std::vector<std::string> getFiles(std::string cate_dir)
 {
-	std::vector<std::string> files;//´æ·ÅÎÄ¼şÃû  
+	std::vector<std::string> files;//ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½  
 
 #ifdef WIN32  
 	_finddata_t file;
 	long lf;
-	//ÊäÈëÎÄ¼ş¼ĞÂ·¾¶  
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Â·ï¿½ï¿½  
 	auto finalPath = cate_dir + "*";
 	if ((lf = _findfirst(finalPath.c_str(), &file)) == -1) {
 		std::cout << finalPath << " not found!!!" << std::endl;
 	}
 	else {
 		while (_findnext(lf, &file) == 0) {
-			//Êä³öÎÄ¼şÃû  
+			//ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½  
 			//cout<<file.name<<endl;  
 			if (strcmp(file.name, ".") == 0 || strcmp(file.name, "..") == 0)
 				continue;
@@ -206,5 +206,5 @@ int main(int argc, char *argv[])
 
 		}
     }
-	std::system("pause");
+	//std::system("pause");
 }
