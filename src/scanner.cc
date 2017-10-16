@@ -16,7 +16,7 @@
 #define FLEX_SCANNER
 #define YY_FLEX_MAJOR_VERSION 2
 #define YY_FLEX_MINOR_VERSION 6
-#define YY_FLEX_SUBMINOR_VERSION 3
+#define YY_FLEX_SUBMINOR_VERSION 4
 #if YY_FLEX_SUBMINOR_VERSION > 0
 #define FLEX_BETA
 #endif
@@ -34,11 +34,23 @@
 /* %if-c-only */
 /* %endif */
 
-    #define yyalloc GLEFFECTSalloc
+#ifdef yyalloc
+#define GLEFFECTSalloc_ALREADY_DEFINED
+#else
+#define yyalloc GLEFFECTSalloc
+#endif
 
-    #define yyrealloc GLEFFECTSrealloc
+#ifdef yyrealloc
+#define GLEFFECTSrealloc_ALREADY_DEFINED
+#else
+#define yyrealloc GLEFFECTSrealloc
+#endif
 
-    #define yyfree GLEFFECTSfree
+#ifdef yyfree
+#define GLEFFECTSfree_ALREADY_DEFINED
+#else
+#define yyfree GLEFFECTSfree
+#endif
 
 /* %if-c-only */
 /* %endif */
@@ -114,14 +126,18 @@ typedef unsigned int flex_uint32_t;
 #define UINT32_MAX             (4294967295U)
 #endif
 
+#ifndef SIZE_MAX
+#define SIZE_MAX               (~(size_t)0)
+#endif
+
 #endif /* ! C99 */
 
 #endif /* ! FLEXINT_H */
 
 /* %endif */
 
-/* %if-c++-only */
 /* begin standard C++ headers. */
+/* %if-c++-only */
 #include <iostream>
 #include <errno.h>
 #include <cstdlib>
@@ -333,9 +349,9 @@ struct yy_buffer_state
 /* %endif */
 /* %endif */
 
-void *GLEFFECTSalloc ( yy_size_t  );
-void *GLEFFECTSrealloc ( void *, yy_size_t  );
-void GLEFFECTSfree ( void *  );
+void *yyalloc ( yy_size_t  );
+void *yyrealloc ( void *, yy_size_t  );
+void yyfree ( void *  );
 
 #define yy_new_buffer yy_create_buffer
 #define yy_set_interactive(is_interactive) \
@@ -1834,10 +1850,10 @@ static const flex_int16_t yy_rule_linenum[25] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 1 "scanner.l"
 /* $Id$ -*- mode: c++ -*- */
 /** \file scanner.ll Define the example Flex lexical scanner */
-#line 5 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 5 "scanner.l"
 
 #include <string>
 #include <sstream>
@@ -1860,7 +1876,7 @@ typedef GLEFFECTS::Parser::token_type token_type;
  * on Win32. The C++ scanner uses STL streams instead. */
 #define YY_NO_UNISTD_H
 
-#line 1863 "scanner.cc"
+#line 1879 "scanner.cc"
 /*** Flex Declarations and Options ***/
 /* enable c++ scanner class generation */
 /* change the name of the scanner class. results in "ExampleFlexLexer" */
@@ -1872,11 +1888,11 @@ typedef GLEFFECTS::Parser::token_type token_type;
 
 /* The following paragraph suffices to track locations accurately. Each time
  * yylex is invoked, the begin position is moved onto the end position. */
-#line 56 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 56 "scanner.l"
 #define YY_USER_ACTION  yylloc->columns(yyleng);
-#line 1877 "scanner.cc"
+#line 1893 "scanner.cc"
 /* Effect States (Direct3D 9) Token*/
-#line 1879 "scanner.cc"
+#line 1895 "scanner.cc"
 
 #define INITIAL 0
 #define PARSE_STATE_CODEBLOCK 1
@@ -1892,7 +1908,7 @@ typedef GLEFFECTS::Parser::token_type token_type;
 #include <unistd.h>
 /* %endif */
 #endif
-    
+
 #ifndef YY_EXTRA_TYPE
 #define YY_EXTRA_TYPE void *
 #endif
@@ -2069,10 +2085,10 @@ YY_DECL
 
 	{
 /* %% [7.0] user's declarations go here */
-#line 80 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 80 "scanner.l"
 
 
-#line 83 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 83 "scanner.l"
  /* code to place at the beginning of yylex() */
 
     BEGIN(INITIAL);
@@ -2080,7 +2096,7 @@ YY_DECL
     yylloc->step();
 
 
-#line 2083 "scanner.cc"
+#line 2099 "scanner.cc"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -2157,12 +2173,12 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 90 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 90 "scanner.l"
 {return token::UNIFORMS;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 92 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 92 "scanner.l"
 {
         BEGIN(PARSE_STATE_CODEBLOCK);
         code_block.clear();
@@ -2171,7 +2187,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 97 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 97 "scanner.l"
 {
     yylval->stringVal = new std::string(code_block.str());
     code_block.clear();
@@ -2182,7 +2198,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 104 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 104 "scanner.l"
 {
     code_block<<yytext;
 }
@@ -2190,7 +2206,7 @@ YY_RULE_SETUP
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 107 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 107 "scanner.l"
 {
     code_block<<std::endl;
     yylloc->lines(yyleng);yylloc->step();
@@ -2198,7 +2214,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 112 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 112 "scanner.l"
 {
     code_block<<yytext;
 }
@@ -2206,47 +2222,47 @@ YY_RULE_SETUP
 case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
-#line 118 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 118 "scanner.l"
 { /* skip comments */ }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 119 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 119 "scanner.l"
 { /* skip comments */ }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 120 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 120 "scanner.l"
 {return token::TECHNIQUE;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 121 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 121 "scanner.l"
 {return token::PASS;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 122 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 122 "scanner.l"
 {return token::COMPILE;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 123 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 123 "scanner.l"
 {return token::FLOAT2;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 124 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 124 "scanner.l"
 {return token::FLOAT3;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 125 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 125 "scanner.l"
 {return token::FLOAT4;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 127 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 127 "scanner.l"
 {
         yylval->stringVal = new std::string(yytext, yyleng);
         return token::STATE_NAME;
@@ -2254,17 +2270,17 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 132 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 132 "scanner.l"
 {yylval->boolVal = true;return token::BOOLEAN;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 133 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 133 "scanner.l"
 {yylval->boolVal = false;return token::BOOLEAN;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 135 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 135 "scanner.l"
 {
     yylval->integerVal = atoi(yytext);
     return token::INTEGER;
@@ -2272,7 +2288,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 140 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 140 "scanner.l"
 {
     yylval->floatVal = atof(yytext);
     return token::FLOAT;
@@ -2280,7 +2296,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 146 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 146 "scanner.l"
 {
     yylval->stringVal = new std::string(yytext, yyleng);
     return token::IDENTIFIER;
@@ -2288,7 +2304,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 152 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 152 "scanner.l"
 {
     yylval->stringVal = new std::string(yytext, yyleng);
     return token::STRING;
@@ -2296,27 +2312,27 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 159 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 159 "scanner.l"
 {yylloc->step();}
 	YY_BREAK
 case 23:
 /* rule 23 can match eol */
 YY_RULE_SETUP
-#line 161 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 161 "scanner.l"
 {yylloc->lines(yyleng); yylloc->step();}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 162 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 162 "scanner.l"
 {return static_cast<token_type>(*yytext);}
 	YY_BREAK
 /*** END EXAMPLE - Change the example lexer rules above ***/
 case 25:
 YY_RULE_SETUP
-#line 167 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 167 "scanner.l"
 ECHO;
 	YY_BREAK
-#line 2319 "scanner.cc"
+#line 2335 "scanner.cc"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(PARSE_STATE_CODEBLOCK):
 	yyterminate();
@@ -2513,9 +2529,9 @@ void yyFlexLexer::ctor_common()
 yyFlexLexer::~yyFlexLexer()
 {
 	delete [] yy_state_buf;
-	GLEFFECTSfree(yy_start_stack  );
+	yyfree( yy_start_stack  );
 	yy_delete_buffer( YY_CURRENT_BUFFER );
-	GLEFFECTSfree(yy_buffer_stack  );
+	yyfree( yy_buffer_stack  );
 }
 
 /* The contents of this function are C++ specific, so the () macro is not used.
@@ -2663,7 +2679,8 @@ int yyFlexLexer::yy_get_next_buffer()
 
 				b->yy_ch_buf = (char *)
 					/* Include room in for 2 EOB chars. */
-					GLEFFECTSrealloc((void *) b->yy_ch_buf,(yy_size_t) (b->yy_buf_size + 2)  );
+					yyrealloc( (void *) b->yy_ch_buf,
+							 (yy_size_t) (b->yy_buf_size + 2)  );
 				}
 			else
 				/* Can't grow it, we don't own it. */
@@ -2712,9 +2729,12 @@ int yyFlexLexer::yy_get_next_buffer()
 	if (((yy_n_chars) + number_to_move) > YY_CURRENT_BUFFER_LVALUE->yy_buf_size) {
 		/* Extend the array by 50%, plus the number we really need. */
 		int new_size = (yy_n_chars) + number_to_move + ((yy_n_chars) >> 1);
-		YY_CURRENT_BUFFER_LVALUE->yy_ch_buf = (char *) GLEFFECTSrealloc((void *) YY_CURRENT_BUFFER_LVALUE->yy_ch_buf,(yy_size_t) new_size  );
+		YY_CURRENT_BUFFER_LVALUE->yy_ch_buf = (char *) yyrealloc(
+			(void *) YY_CURRENT_BUFFER_LVALUE->yy_ch_buf, (yy_size_t) new_size  );
 		if ( ! YY_CURRENT_BUFFER_LVALUE->yy_ch_buf )
 			YY_FATAL_ERROR( "out of dynamic memory in yy_get_next_buffer()" );
+		/* "- 2" to take care of EOB's */
+		YY_CURRENT_BUFFER_LVALUE->yy_buf_size = (int) (new_size - 2);
 	}
 
 	(yy_n_chars) += number_to_move;
@@ -2947,6 +2967,9 @@ int yyFlexLexer::yy_get_next_buffer()
  */
 void yyFlexLexer::yyrestart( std::istream* input_file )
 {
+	if( ! input_file ) {
+		input_file = &yyin;
+	}
 	yyrestart( *input_file );
 }
 /* %endif */
@@ -3020,7 +3043,7 @@ void yyFlexLexer::yyrestart( std::istream* input_file )
 {
 	YY_BUFFER_STATE b;
     
-	b = (YY_BUFFER_STATE) GLEFFECTSalloc(sizeof( struct yy_buffer_state )  );
+	b = (YY_BUFFER_STATE) yyalloc( sizeof( struct yy_buffer_state )  );
 	if ( ! b )
 		YY_FATAL_ERROR( "out of dynamic memory in yy_create_buffer()" );
 
@@ -3029,7 +3052,7 @@ void yyFlexLexer::yyrestart( std::istream* input_file )
 	/* yy_ch_buf has to be 2 characters longer than the size given because
 	 * we need to put in 2 end-of-buffer characters.
 	 */
-	b->yy_ch_buf = (char *) GLEFFECTSalloc((yy_size_t) (b->yy_buf_size + 2)  );
+	b->yy_ch_buf = (char *) yyalloc( (yy_size_t) (b->yy_buf_size + 2)  );
 	if ( ! b->yy_ch_buf )
 		YY_FATAL_ERROR( "out of dynamic memory in yy_create_buffer()" );
 
@@ -3071,9 +3094,9 @@ void yyFlexLexer::yyrestart( std::istream* input_file )
 		YY_CURRENT_BUFFER_LVALUE = (YY_BUFFER_STATE) 0;
 
 	if ( b->yy_is_our_buffer )
-		GLEFFECTSfree((void *) b->yy_ch_buf  );
+		yyfree( (void *) b->yy_ch_buf  );
 
-	GLEFFECTSfree((void *) b  );
+	yyfree( (void *) b  );
 }
 
 /* Initializes or reinitializes a buffer.
@@ -3094,7 +3117,7 @@ void yyFlexLexer::yyrestart( std::istream* input_file )
 /* %if-c-only */
 /* %endif */
 /* %if-c++-only */
-	b->yy_input_file = (&file == 0) ? NULL : file.rdbuf();
+	b->yy_input_file = file.rdbuf();
 /* %endif */
 	b->yy_fill_buffer = 1;
 
@@ -3229,7 +3252,7 @@ void yyFlexLexer::yyensure_buffer_stack(void)
 		 * immediate realloc on the next call.
          */
       num_to_alloc = 1; /* After all that talk, this was set to 1 anyways... */
-		(yy_buffer_stack) = (struct yy_buffer_state**)GLEFFECTSalloc
+		(yy_buffer_stack) = (struct yy_buffer_state**)yyalloc
 								(num_to_alloc * sizeof(struct yy_buffer_state*)
 								);
 		if ( ! (yy_buffer_stack) )
@@ -3248,7 +3271,7 @@ void yyFlexLexer::yyensure_buffer_stack(void)
 		yy_size_t grow_size = 8 /* arbitrary grow size */;
 
 		num_to_alloc = (yy_buffer_stack_max) + grow_size;
-		(yy_buffer_stack) = (struct yy_buffer_state**)GLEFFECTSrealloc
+		(yy_buffer_stack) = (struct yy_buffer_state**)yyrealloc
 								((yy_buffer_stack),
 								num_to_alloc * sizeof(struct yy_buffer_state*)
 								);
@@ -3285,10 +3308,11 @@ void yyFlexLexer::yyensure_buffer_stack(void)
 		new_size = (yy_size_t) (yy_start_stack_depth) * sizeof( int );
 
 		if ( ! (yy_start_stack) )
-			(yy_start_stack) = (int *) GLEFFECTSalloc(new_size  );
+			(yy_start_stack) = (int *) yyalloc( new_size  );
 
 		else
-			(yy_start_stack) = (int *) GLEFFECTSrealloc((void *) (yy_start_stack),new_size  );
+			(yy_start_stack) = (int *) yyrealloc(
+					(void *) (yy_start_stack), new_size  );
 
 		if ( ! (yy_start_stack) )
 			YY_FATAL_ERROR( "out of memory expanding start-condition stack" );
@@ -3398,12 +3422,12 @@ static int yy_flex_strlen (const char * s )
 }
 #endif
 
-void *GLEFFECTSalloc (yy_size_t  size )
+void *yyalloc (yy_size_t  size )
 {
 			return malloc(size);
 }
 
-void *GLEFFECTSrealloc  (void * ptr, yy_size_t  size )
+void *yyrealloc  (void * ptr, yy_size_t  size )
 {
 		
 	/* The cast to (char *) in the following accommodates both
@@ -3416,9 +3440,9 @@ void *GLEFFECTSrealloc  (void * ptr, yy_size_t  size )
 	return realloc(ptr, size);
 }
 
-void GLEFFECTSfree (void * ptr )
+void yyfree (void * ptr )
 {
-			free( (char *) ptr );	/* see GLEFFECTSrealloc() for (char *) cast */
+			free( (char *) ptr );	/* see yyrealloc() for (char *) cast */
 }
 
 /* %if-tables-serialization definitions */
@@ -3428,7 +3452,7 @@ void GLEFFECTSfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 167 "E:/Source/GitRepos/glEffects/src/scanner.l"
+#line 167 "scanner.l"
 
 
 namespace GLEFFECTS {

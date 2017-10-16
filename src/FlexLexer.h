@@ -49,7 +49,7 @@
 #define __FLEX_LEXER_H
 
 #include <iostream>
-
+#include <istream>
 extern "C++" {
 
 struct yy_buffer_state;
