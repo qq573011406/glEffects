@@ -59,7 +59,7 @@ class TechniqueNode;
 %union {
 	typedef std::string					_str;
 	typedef std::vector<_str*>			_strs;
-	typedef class Uniform				_uniform;
+	typedef class UniformNode			_uniform;
 	typedef std::vector<_uniform*>		_uniforms;
 	typedef class TechniqueNode			_techNode;
 	typedef class PassNode				_passNode;
@@ -222,13 +222,13 @@ stmt_code_block: CODE_BLOCK STATE_NAME {
 				}
 
 stmt_uniform: stmt_string stmt_string ';' {
-				Uniform* value = new Uniform(*$1,*$2,"");
+				UniformNode* value = new UniformNode(*$1,*$2,"");
 				delete $1;
 				delete $2;
 				driver.tree.AddUniform(*value);
 }
 			| stmt_string stmt_string ':' stmt_string ';' {
-				Uniform* value = new Uniform(*$1,*$2,*$4);
+				UniformNode* value = new UniformNode(*$1,*$2,*$4);
 				delete $1;
 				delete $2;
 				delete $4;

@@ -1,8 +1,8 @@
-// $Id$
-/** \file expression.h Implements an example calculator class group. */
 
-#ifndef EXPRESSION_H
-#define EXPRESSION_H
+#pragma  once
+
+#ifndef GLEFFECTS_H
+#define GLEFFECTS_H
 
 #include <map>
 #include <vector>
@@ -331,16 +331,16 @@ private:
 	std::string m_Code;
 };
 
-class Uniform
+class UniformNode
 {
 public:
-	Uniform(std::string type, std::string name, std::string semantic)
+	UniformNode(std::string type, std::string name, std::string semantic)
 	{
 		m_Name = name;
 		m_Type = type;
 		m_Semantic = semantic;
 	}
-	~Uniform() {};
+	~UniformNode() {};
 
 	const std::string getName()const { return m_Name; }
 	const std::string getType()const { return m_Type; }
@@ -378,11 +378,11 @@ public:
 		}
 		m_Uniforms.clear();
 	}
-	const std::vector<Uniform*> getUniforms() const { return m_Uniforms; }
+	const std::vector<UniformNode*> getUniforms() const { return m_Uniforms; }
 	const std::vector<CodeBlock*> getCodeBlocks() const { return m_CodeBlocks; }
 	const std::vector<TechniqueNode*> getTechiques() const { return m_Techniques; }
 	void AddTechnique(TechniqueNode& technique) { m_Techniques.push_back(&technique); }
-	void AddUniform(Uniform& uniform) { m_Uniforms.push_back(&uniform); }
+	void AddUniform(UniformNode& uniform) { m_Uniforms.push_back(&uniform); }
 	void AddCodeBlock(CodeBlock* block)
 	{
 		m_CodeBlocks.push_back(block);
@@ -390,8 +390,8 @@ public:
 private:
 	std::vector<TechniqueNode*> m_Techniques;
 	std::vector<CodeBlock*> m_CodeBlocks;
-	std::vector<Uniform*> m_Uniforms;
+	std::vector<UniformNode*> m_Uniforms;
 };
 
 
-#endif // EXPRESSION_H
+#endif // GLEFFECTS_H
