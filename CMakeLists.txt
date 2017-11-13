@@ -2,6 +2,13 @@ cmake_minimum_required(VERSION 3.1)
 
 project(glEffectsParser)
 set (CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+set(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
+
+
+
 
 if(WIN32)
     #$(YACC) -o parser.cc --defines=parser.h parser.yy
@@ -75,3 +82,4 @@ target_include_directories(glEffectsParser PUBLIC ${PROJECT_SOURCE_DIR}/src/)
 add_executable(glEffectsParserTest ${PROJECT_SOURCE_DIR}/src/exprtest.cc)
 
 target_link_libraries(glEffectsParserTest glEffectsParser)
+
