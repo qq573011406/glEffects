@@ -4,60 +4,69 @@ project(glEffectsParser)
 set (CMAKE_CXX_STANDARD 11)
 
 if(WIN32)
-
     #$(YACC) -o parser.cc --defines=parser.h parser.yy
-    add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/src/parser.cc
+    add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/src/parser.cc ${PROJECT_SOURCE_DIR}/src/parser.h
     COMMAND ${PROJECT_SOURCE_DIR}/tools/bison.exe -o parser.cc --defines=parser.h ${PROJECT_SOURCE_DIR}/src/parser.yy
     COMMAND move /y parser.cc ${PROJECT_SOURCE_DIR}/src/parser.cc
     COMMAND move /y parser.h ${PROJECT_SOURCE_DIR}/src/parser.h
-    MAIN_DEPENDENCY ${PROJECT_SOURCE_DIR}/src/parser.yy
+    DEPENDS ${PROJECT_SOURCE_DIR}/src/parser.yy
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/tools/
     COMMENT "Executing Bison on /parser.yy"
     )
     #$(LEX) -o scanner.cc scanner.ll
-    add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/src/scanner.cc
+    add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/src/scanner.cc 
+    ${PROJECT_SOURCE_DIR}/src/location.hh 
+    ${PROJECT_SOURCE_DIR}/src/position.hh
+    ${PROJECT_SOURCE_DIR}/src/stack.hh
     COMMAND ${PROJECT_SOURCE_DIR}/tools/flex.exe -o scanner.cc ${PROJECT_SOURCE_DIR}/src/scanner.l
     COMMAND move /y scanner.cc ${PROJECT_SOURCE_DIR}/src/scanner.cc
     COMMAND move /y location.hh ${PROJECT_SOURCE_DIR}/src/location.hh
     COMMAND move /y position.hh ${PROJECT_SOURCE_DIR}/src/position.hh
     COMMAND move /y stack.hh ${PROJECT_SOURCE_DIR}/src/stack.hh
-    MAIN_DEPENDENCY ${PROJECT_SOURCE_DIR}/src/scanner.l
+    DEPENDS ${PROJECT_SOURCE_DIR}/src/scanner.l
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/tools/
     COMMENT "Executing flex on scanner.l"
     )
 endif(WIN32)
 if(APPLE)
-
   #$(YACC) -o parser.cc --defines=parser.h parser.yy
-  add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/src/parser.cc
+  add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/src/parser.cc ${PROJECT_SOURCE_DIR}/src/parser.h
   COMMAND bison -o parser.cc --defines=parser.h parser.yy
-  MAIN_DEPENDENCY ${PROJECT_SOURCE_DIR}/src/parser.yy
+  DEPENDS ${PROJECT_SOURCE_DIR}/src/parser.yy
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/src/
   COMMENT "Executing Bison on /parser.yy"
   )
 
   #$(LEX) -o scanner.cc scanner.ll
-  add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/src/scanner.cc
+  add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/src/scanner.cc ${PROJECT_SOURCE_DIR}/src/scanner.cc
+  ${PROJECT_SOURCE_DIR}/src/location.hh 
+  ${PROJECT_SOURCE_DIR}/src/position.hh
+  ${PROJECT_SOURCE_DIR}/src/stack.hh
   COMMAND flex -o scanner.cc scanner.l
-  MAIN_DEPENDENCY ${PROJECT_SOURCE_DIR}/src/scanner.l
+  DEPENDS ${PROJECT_SOURCE_DIR}/src/scanner.l
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/src/
   COMMENT "Executing flex on scanner.l"
   )
 
 endif(APPLE)
 
-add_custom_target(flexAndBison ALL
-DEPENDS ${PROJECT_SOURCE_DIR}/src/parser.cc
-DEPENDS ${PROJECT_SOURCE_DIR}/src/scanner.cc
-)
 
 set_source_files_properties(${PROJECT_SOURCE_DIR}/src/scanner.cc PROPERTIES GENERATED 1)
 set_source_files_properties(${PROJECT_SOURCE_DIR}/src/parser.cc PROPERTIES GENERATED 1)
+set_source_files_properties(${PROJECT_SOURCE_DIR}/src/parser.h PROPERTIES GENERATED 1)
+set_source_files_properties(${PROJECT_SOURCE_DIR}/src/location.h PROPERTIES GENERATED 1)
+set_source_files_properties(${PROJECT_SOURCE_DIR}/src/position.h PROPERTIES GENERATED 1)
+set_source_files_properties(${PROJECT_SOURCE_DIR}/src/stack.h PROPERTIES GENERATED 1)
 
 add_library(glEffectsParser
 ${PROJECT_SOURCE_DIR}/src/gleffects.h
 ${PROJECT_SOURCE_DIR}/src/parser.cc
+${PROJECT_SOURCE_DIR}/src/parser.h
 ${PROJECT_SOURCE_DIR}/src/scanner.cc
+${PROJECT_SOURCE_DIR}/src/scanner.h
+${PROJECT_SOURCE_DIR}/src/location.h
+${PROJECT_SOURCE_DIR}/src/position.h
+${PROJECT_SOURCE_DIR}/src/stack.h
 ${PROJECT_SOURCE_DIR}/src/driver.h
 ${PROJECT_SOURCE_DIR}/src/driver.cc
 )
