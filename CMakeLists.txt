@@ -2,15 +2,12 @@ cmake_minimum_required(VERSION 3.1)
 
 project(glEffectsParser)
 set (CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELEASE} /MT")
-set(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_RELEASE} /MT")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
-
-
-
 
 if(WIN32)
+    set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+    set(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
     #$(YACC) -o parser.cc --defines=parser.h parser.yy
     add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/src/parser.cc ${PROJECT_SOURCE_DIR}/src/parser.h
     COMMAND ${PROJECT_SOURCE_DIR}/tools/bison.exe -o parser.cc --defines=parser.h ${PROJECT_SOURCE_DIR}/src/parser.yy
@@ -45,7 +42,7 @@ if(APPLE)
   )
 
   #$(LEX) -o scanner.cc scanner.ll
-  add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/src/scanner.cc ${PROJECT_SOURCE_DIR}/src/scanner.cc
+  add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/src/scanner.cc
   ${PROJECT_SOURCE_DIR}/src/location.hh 
   ${PROJECT_SOURCE_DIR}/src/position.hh
   ${PROJECT_SOURCE_DIR}/src/stack.hh
