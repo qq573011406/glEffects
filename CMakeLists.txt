@@ -2,8 +2,7 @@ cmake_minimum_required(VERSION 3.1)
 
 project(glEffectsParser)
 
-option(GenerateScannerCode "Generate scanner code " OFF)
-option(GenerateParserCode "Generate parser code" OFF)
+option(GLEFFECTSPARSER_GenerateScannerAndParserCode "Generate scanner and parser code " OFF)
 
 set (CMAKE_CXX_STANDARD 11)
 
@@ -14,7 +13,7 @@ if(WIN32)
     set(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_RELEASE} /MT")
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
-    if(GenerateParserCode)
+    if(GLEFFECTSPARSER_GenerateScannerAndParserCode)
       #$(YACC) -o parser.cc --defines=parser.h parser.yy
       add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/src/parser.cc ${PROJECT_SOURCE_DIR}/src/parser.h
         COMMAND ${PROJECT_SOURCE_DIR}/tools/bison.exe -o parser.cc --defines=parser.h ${PROJECT_SOURCE_DIR}/src/parser.yy
@@ -24,8 +23,6 @@ if(WIN32)
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/tools/
         COMMENT "Executing Bison on /parser.yy"
       )
-    endif()
-    if(GenerateScannerCode)
       #$(LEX) -o scanner.cc scanner.ll
       add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/src/scanner.cc 
         ${PROJECT_SOURCE_DIR}/src/location.hh 
@@ -43,7 +40,7 @@ if(WIN32)
     endif()
 endif(WIN32)
 if(APPLE)
-  if(GenerateParserCode)
+  if(GLEFFECTSPARSER_GenerateScannerAndParserCode)
       #$(YACC) -o parser.cc --defines=parser.h parser.yy
       add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/src/parser.cc ${PROJECT_SOURCE_DIR}/src/parser.h
       COMMAND bison -o parser.cc --defines=parser.h parser.yy
@@ -51,9 +48,6 @@ if(APPLE)
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/src/
       COMMENT "Executing Bison on /parser.yy"
       )
-  endif()
-
-  if(GenerateScannerCode)
     #$(LEX) -o scanner.cc scanner.ll
     add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/src/scanner.cc
     ${PROJECT_SOURCE_DIR}/src/location.hh 
@@ -68,14 +62,11 @@ if(APPLE)
 
 endif(APPLE)
 
-if(GenerateScannerCode)
+if(GLEFFECTSPARSER_GenerateScannerAndParserCode)
   set_source_files_properties(${PROJECT_SOURCE_DIR}/src/scanner.cc PROPERTIES GENERATED 1)
   set_source_files_properties(${PROJECT_SOURCE_DIR}/src/location.hh PROPERTIES GENERATED 1)
   set_source_files_properties(${PROJECT_SOURCE_DIR}/src/position.hh PROPERTIES GENERATED 1)
   set_source_files_properties(${PROJECT_SOURCE_DIR}/src/stack.h PROPERTIES GENERATED 1)
-endif()
-
-if(GenerateParserCode)
   set_source_files_properties(${PROJECT_SOURCE_DIR}/src/parser.cc PROPERTIES GENERATED 1)
   set_source_files_properties(${PROJECT_SOURCE_DIR}/src/parser.h PROPERTIES GENERATED 1)
 endif()
