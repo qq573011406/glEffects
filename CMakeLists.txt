@@ -70,8 +70,8 @@ endif(APPLE)
 
 if(GenerateScannerCode)
   set_source_files_properties(${PROJECT_SOURCE_DIR}/src/scanner.cc PROPERTIES GENERATED 1)
-  set_source_files_properties(${PROJECT_SOURCE_DIR}/src/location.h PROPERTIES GENERATED 1)
-  set_source_files_properties(${PROJECT_SOURCE_DIR}/src/position.h PROPERTIES GENERATED 1)
+  set_source_files_properties(${PROJECT_SOURCE_DIR}/src/location.hh PROPERTIES GENERATED 1)
+  set_source_files_properties(${PROJECT_SOURCE_DIR}/src/position.hh PROPERTIES GENERATED 1)
   set_source_files_properties(${PROJECT_SOURCE_DIR}/src/stack.h PROPERTIES GENERATED 1)
 endif()
 
@@ -87,9 +87,9 @@ ${PROJECT_SOURCE_DIR}/src/parser.cc
 ${PROJECT_SOURCE_DIR}/src/parser.h
 ${PROJECT_SOURCE_DIR}/src/scanner.cc
 ${PROJECT_SOURCE_DIR}/src/scanner.h
-${PROJECT_SOURCE_DIR}/src/location.h
-${PROJECT_SOURCE_DIR}/src/position.h
-${PROJECT_SOURCE_DIR}/src/stack.h
+${PROJECT_SOURCE_DIR}/src/location.hh
+${PROJECT_SOURCE_DIR}/src/position.hh
+${PROJECT_SOURCE_DIR}/src/stack.hh
 ${PROJECT_SOURCE_DIR}/src/driver.h
 ${PROJECT_SOURCE_DIR}/src/driver.cc
 )
