@@ -9,10 +9,6 @@ set (CMAKE_CXX_STANDARD 11)
 
 
 if(WIN32)
-    set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELEASE} /MT")
-    set(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_RELEASE} /MT")
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
     if(GLEFFECTSPARSER_GenerateScannerAndParserCode)
       #$(YACC) -o parser.cc --defines=parser.h parser.yy
       add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/src/parser.cc ${PROJECT_SOURCE_DIR}/src/parser.h
@@ -86,7 +82,7 @@ ${PROJECT_SOURCE_DIR}/src/driver.cc
 )
 target_include_directories(glEffectsParser PUBLIC ${PROJECT_SOURCE_DIR}/src/)
 
-add_executable(glEffectsParserTest ${PROJECT_SOURCE_DIR}/src/exprtest.cc)
+#add_executable(glEffectsParserTest ${PROJECT_SOURCE_DIR}/src/exprtest.cc)
 
-target_link_libraries(glEffectsParserTest glEffectsParser)
+#target_link_libraries(glEffectsParserTest glEffectsParser)
 
